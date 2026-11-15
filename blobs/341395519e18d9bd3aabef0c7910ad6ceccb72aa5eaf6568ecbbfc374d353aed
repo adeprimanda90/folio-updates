@@ -80,6 +80,12 @@ input,select,textarea{font:inherit;color:inherit}
 .selbox{position:absolute;outline:1.5px solid var(--sel);pointer-events:none;outline-offset:1px}
 .selbox .h{position:absolute;width:9px;height:9px;background:#fff;border:1.5px solid var(--sel);border-radius:2px;pointer-events:auto;margin:-5px 0 0 -5px}
 .h[data-dir=nw],.h[data-dir=se]{cursor:nwse-resize}.h[data-dir=ne],.h[data-dir=sw]{cursor:nesw-resize}
+.thumb.sel canvas{outline:3px solid var(--sel);outline-offset:1px}
+.pselbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:6px 8px;margin:0 0 8px;border:1px solid var(--line);border-radius:8px;background:rgba(26,115,232,.06);font-size:12px}
+.cprow{display:grid;grid-template-columns:18px 78px 86px 96px 1fr;align-items:center;gap:8px;padding:7px 8px;border:1px solid var(--line);border-radius:8px;margin:5px 0;cursor:pointer}
+.cprow:has(input[type=radio]:checked){border-color:var(--sel);background:rgba(26,115,232,.06)}
+.cprow .s{font-weight:600}.cprow .p,.cprow .d{color:var(--ink-3);font-size:12px}
+.cprow.tg{grid-template-columns:18px auto 80px 96px 1fr}
 .formlayer{position:absolute;inset:0;pointer-events:none;z-index:20}
 .ffield{position:absolute;pointer-events:auto;box-sizing:border-box;margin:0;border:1px solid rgba(26,115,232,.55);background:rgba(226,238,255,.94);border-radius:2px;font-family:Helvetica,Arial,sans-serif;color:#000;padding:0 2px;outline:none;line-height:1.2}
 .ffield:focus{border-color:var(--sel);background:#fff;box-shadow:0 0 0 2px rgba(26,115,232,.25)}
@@ -268,7 +274,7 @@ window.folioDirty=()=>S.docs.some(d=>d.dirty);
 window.folioMenu=cmd=>{const ed=document.activeElement;const typing=ed&&(ed.isContentEditable||/INPUT|TEXTAREA/.test(ed.tagName));
   const A={open:openDialog,save:()=>saveDoc(),saveAs:()=>saveDoc(true),print:printDoc,newDoc:createBlankDoc,close:()=>{if(S.docs.length)closeDoc(S.active);},
     undo:()=>typing?document.execCommand("undo"):undo(),redo:()=>typing?document.execCommand("redo"):redo(),
-    ocr:ocrDialog,compress:compressDialog,exportImages:exportImagesDialog,savePassword:savePasswordDialog,batchSign:batchSignDialog,info:()=>openInfo('about'),updates:()=>{const M=openInfo('about');setTimeout(()=>{const b=M.$('#updNow');if(b){b.scrollIntoView({block:'center'});b.click();}},700);},tutorial:()=>openInfo('tutorial'),ideas:()=>openInfo('ideas'),zoomIn:()=>setZoom(S.zoom*1.2),zoomOut:()=>setZoom(S.zoom/1.2),fit:()=>fitWidth(),find:()=>{showSide("search");setTimeout(()=>$("#sq")?.focus(),20);}};
+    ocr:ocrDialog,compress:compressDialog,exportPages:exportPagesDialog,exportImages:exportImagesDialog,savePassword:savePasswordDialog,batchSign:batchSignDialog,info:()=>openInfo('about'),updates:()=>{const M=openInfo('about');setTimeout(()=>{const b=M.$('#updNow');if(b){b.scrollIntoView({block:'center'});b.click();}},700);},tutorial:()=>openInfo('tutorial'),ideas:()=>openInfo('ideas'),zoomIn:()=>setZoom(S.zoom*1.2),zoomOut:()=>setZoom(S.zoom/1.2),fit:()=>fitWidth(),find:()=>{showSide("search");setTimeout(()=>$("#sq")?.focus(),20);}};
   (A[cmd]||(()=>{}))();};
 
 /* ================= helpers ================= */
@@ -1356,7 +1362,7 @@ function renderProps(){
     if(t==='highlight')h+=`<div class="pg">${colorRow('Color','hl',D.hl,true)}</div>`;
     if(['underline','strike'].includes(t))h+=`<div class="pg">${colorRow('Color','ul',D.ul,true)}</div>`;
     if(t==='note')h+=`<div class="pg">${colorRow('Color','noteColor',D.noteColor,true)}</div>`;
-    const d=curDoc();const pg=d.pages[S.curPage];if(pg){const[w,h2]=viewDims(pg);h+=`<div class="pg"><h4>Document</h4><div class="tip">${d.pages.length} page${d.pages.length>1?'s':''} · page ${S.curPage+1} is ${Math.round(w)}×${Math.round(h2)} pt (${(w/72*25.4).toFixed(0)}×${(h2/72*25.4).toFixed(0)} mm)</div></div><div class="pg"><h4>Tools</h4><div class="btnrow"><button class="mini" data-a="ocr">${icon('edittext')} Recognise text (OCR)…</button><button class="mini" data-a="exportimg">${icon('image')} Export as images…</button><button class="mini" data-a="compress">Compress…</button><button class="mini" data-a="savepw">Save with password…</button><button class="mini" data-a="batch">${icon('sign')} Batch sign…</button></div></div>`;}
+    const d=curDoc();const pg=d.pages[S.curPage];if(pg){const[w,h2]=viewDims(pg);h+=`<div class="pg"><h4>Document</h4><div class="tip">${d.pages.length} page${d.pages.length>1?'s':''} · page ${S.curPage+1} is ${Math.round(w)}×${Math.round(h2)} pt (${(w/72*25.4).toFixed(0)}×${(h2/72*25.4).toFixed(0)} mm)</div></div><div class="pg"><h4>Tools</h4><div class="btnrow"><button class="mini" data-a="ocr">${icon('edittext')} Recognise text (OCR)…</button><button class="mini" data-a="exportpages">${icon('extract')} Export pages…</button><button class="mini" data-a="exportimg">${icon('image')} Export as images…</button><button class="mini" data-a="compress">Compress…</button><button class="mini" data-a="savepw">Save with password…</button><button class="mini" data-a="batch">${icon('sign')} Batch sign…</button></div></div>`;}
     h+=`<div class="pg tip"><b>Shortcuts</b><br><span class="kbd">V</span> select · <span class="kbd">E</span> edit text · <span class="kbd">T</span> add text · <span class="kbd">C</span> copy element · <span class="kbd">S</span> sign · <span class="kbd">D</span> draw · <span class="kbd">X</span> erase · <span class="kbd">Ctrl</span>+<span class="kbd">Z</span> undo · <span class="kbd">Ctrl</span>+<span class="kbd">C</span>/<span class="kbd">V</span> copy/paste · <span class="kbd">Del</span> delete · arrows nudge</div>`;
   }
   P.innerHTML=h;
@@ -1388,6 +1394,7 @@ function setupProps(){
       case 'rmbg':if(o)imageRemoveBg(o);break;
       case 'rmlines':if(o)imageRemoveLines(o);break;
       case 'ocr':ocrDialog();break;
+      case 'exportpages':exportPagesDialog();break;
       case 'exportimg':exportImagesDialog();break;
       case 'savepw':savePasswordDialog();break;
       case 'compress':compressDialog();break;
@@ -1538,20 +1545,26 @@ function renderSide(){
   const id=S.side;const T=$('#sideTitle'),A=$('#sideActions'),B=$('#sideBody');T.textContent=SIDES.find(s=>s.id===id).t;A.innerHTML='';B.innerHTML='';const d=curDoc();
   if(id==='pages'){
     if(!d){B.innerHTML='<div class="tip">No document open.</div>';return;}
-    A.innerHTML=`<button class="mini" title="Insert blank page after current" data-pa="blank">${icon('plus')}</button> <button class="mini" title="Insert pages from another PDF (merge)" data-pa="insert">${icon('newdoc')}</button>`;
-    A.onclick=e=>{const b=e.target.closest('[data-pa]');if(!b)return;if(b.dataset.pa==='blank')insertBlank();else $('#fInsert').click();};
+    A.innerHTML=`<button class="mini" title="Insert blank page after current" data-pa="blank">${icon('plus')}</button> <button class="mini" title="Insert pages from another PDF (merge)" data-pa="insert">${icon('newdoc')}</button> <button class="mini" title="Export pages as a new PDF, or as separate PDFs" data-pa="export">${icon('extract')}</button>`;
+    A.onclick=e=>{const b=e.target.closest('[data-pa]');if(!b)return;if(b.dataset.pa==='blank')insertBlank();else if(b.dataset.pa==='export')exportPagesDialog();else $('#fInsert').click();};
+    if(!d.pageSel||d.pageSelLen!==d.pages.length){d.pageSel=new Set();d.pageSelLen=d.pages.length;}
+    const bar=el('div','pselbar');bar.id='pselBar';B.append(bar);
     const list=el('div','thumbs');B.append(list);
     d.pages.forEach((pg,i)=>{const t=el('div','thumb'+(i===S.curPage?' on':''));t.draggable=true;t.dataset.idx=i;
       const c=el('canvas');const[vw,vh]=viewDims(pg);const s=130/Math.max(vw,vh*.8);c.style.width=vw*s+'px';c.style.height=vh*s+'px';t.append(c);
       t.append(el('div','n',String(i+1)));
       const ta=el('div','ta');ta.innerHTML=`<button data-ta="rotl" title="Rotate left">${icon('rotl')}</button><button data-ta="rotr" title="Rotate right">${icon('rotr')}</button><button data-ta="dup" title="Duplicate page">${icon('dup')}</button><button data-ta="ext" title="Extract to new document">${icon('extract')}</button><button data-ta="del" title="Delete page">${icon('trash')}</button>`;t.append(ta);
-      t.onclick=e=>{const b=e.target.closest('[data-ta]');if(b){pageAction(i,b.dataset.ta);return;}scrollToPage(i);highlightThumb();};
+      t.onclick=e=>{const b=e.target.closest('[data-ta]');if(b){pageAction(i,b.dataset.ta);return;}const ps=d.pageSel;
+        if(e.metaKey||e.ctrlKey){ps.has(i)?ps.delete(i):ps.add(i);d.pageAnchor=i;}
+        else if(e.shiftKey&&d.pageAnchor!=null){for(let k=Math.min(d.pageAnchor,i);k<=Math.max(d.pageAnchor,i);k++)ps.add(k);}
+        else{ps.clear();ps.add(i);d.pageAnchor=i;scrollToPage(i);}
+        highlightThumb();};
       t.ondragstart=e=>{S.dragThumb=i;e.dataTransfer.effectAllowed='move';};
       t.ondragover=e=>{if(S.dragThumb==null)return;e.preventDefault();t.classList.add('dragover');};t.ondragleave=()=>t.classList.remove('dragover');
-      t.ondrop=e=>{e.preventDefault();t.classList.remove('dragover');const from=S.dragThumb;S.dragThumb=null;if(from==null||from===i)return;pushUndo();const[m]=d.pages.splice(from,1);d.pages.splice(i,0,m);buildViewer();renderSide();scrollToPage(i);};
+      t.ondrop=e=>{e.preventDefault();t.classList.remove('dragover');const from=S.dragThumb;S.dragThumb=null;if(from==null||from===i)return;pushUndo();const[m]=d.pages.splice(from,1);d.pages.splice(i,0,m);d.pageSel=new Set();buildViewer();renderSide();scrollToPage(i);};
       list.append(t);thumbQ.add(i);
     });
-    runThumbs();
+    runThumbs();updatePageSelBar();highlightThumb();
   }
   if(id==='library'){
     A.innerHTML=`<button class="mini pri" data-la="new">${icon('plus')} New</button>`;A.onclick=e=>{if(e.target.closest('[data-la]'))openSignModal();};
@@ -1603,7 +1616,7 @@ async function renderThumb(i){
   const[vw]=viewDims(pg);const cssW=parseFloat(t.style.width);const s=cssW/vw*dpr();const[,vh]=viewDims(pg);t.width=Math.round(vw*s);t.height=Math.round(vh*s);const ctx=t.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,t.width,t.height);
   try{if(pg.srcId){const p=await getRenderPage(pg);await p.render({canvasContext:ctx,viewport:p.getViewport({scale:s,rotation:totalRot(pg)})}).promise;}ctx.save();ctx.scale(s,s);for(const o of pg.objects)drawObjCanvas(ctx,o);ctx.restore();}catch(e){}
 }
-function highlightThumb(){document.querySelectorAll('.thumb').forEach(t=>t.classList.toggle('on',+t.dataset.idx===S.curPage));const on=document.querySelector('.thumb.on');if(on&&S.side==='pages'){const b=$('#sideBody');const r=on.getBoundingClientRect(),br=b.getBoundingClientRect();if(r.top<br.top||r.bottom>br.bottom)on.scrollIntoView({block:'nearest'});}}
+function highlightThumb(){const ps=curDoc()&&curDoc().pageSel;document.querySelectorAll('.thumb').forEach(t=>{t.classList.toggle('on',+t.dataset.idx===S.curPage);t.classList.toggle('sel',!!(ps&&ps.size>1&&ps.has(+t.dataset.idx)));});updatePageSelBar();const on=document.querySelector('.thumb.on');if(on&&S.side==='pages'){const b=$('#sideBody');const r=on.getBoundingClientRect(),br=b.getBoundingClientRect();if(r.top<br.top||r.bottom>br.bottom)on.scrollIntoView({block:'nearest'});}}
 function pageAction(i,a){
   const d=curDoc();const pg=d.pages[i];
   if(a==='rotl'||a==='rotr'){pushUndo();pg.rot=((pg.rot||0)+(a==='rotr'?90:270))%360;rotateObjects(pg,a==='rotr');buildViewer();renderSide();scrollToPage(i);}
@@ -1815,67 +1828,152 @@ function downscale(src,tw,th,keepAlpha){   // halve step by step for a clean res
   while(cw/2>=tw&&ch/2>=th){const n=document.createElement('canvas');n.width=Math.max(1,Math.round(cw/2));n.height=Math.max(1,Math.round(ch/2));const g=n.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(cur,0,0,n.width,n.height);cur=n;cw=n.width;ch=n.height;}
   const o=document.createElement('canvas');o.width=tw;o.height=th;const g=o.getContext('2d');if(!keepAlpha){g.fillStyle='#fff';g.fillRect(0,0,tw,th);}g.imageSmoothingQuality='high';g.drawImage(cur,0,0,tw,th);return o;
 }
-async function compressImages(doc,opt){
-  const N=n=>PL.PDFName.of(n),use=new Map();   // image -> largest size it is drawn at (points)
+/* ================= Tools: export images, save with password, batch sign ================= */
+const blobOf=(c,type,q)=>new Promise(r=>c.toBlob(r,type,q));
+async function blobB64(b){return toB64(new Uint8Array(await b.arrayBuffer()));}
+// quality level 0 (best) … 1 (smallest): picture resolution and JPEG quality
+const compressLevel=t=>({dpi:Math.round(220*Math.pow(36/220,t)),q:+(0.86-0.5*t).toFixed(2)});
+function compressScan(doc){   // image -> largest size it is drawn at (points)
+  const use=new Map();
   for(const page of doc.getPages()){try{hideInStream(null,pageContentBin(page),page.node.Resources(),[],[1,0,0,1,0,0],0,new Map(),{onImage:(ref,bb)=>{if(!ref)return;const k=ref.toString(),u=use.get(k)||[0,0];use.set(k,[Math.max(u[0],bb[2]-bb[0]),Math.max(u[1],bb[3]-bb[1])]);}});}catch(e){console.warn('Folio: image scan failed',e);}}
-  const R={images:0,changed:0,saved:0,skipped:0};
+  return use;
+}
+// Decode one picture (and its transparency mask) once; null = a kind we leave alone.
+async function prepImage(doc,obj,info){
+  const N=n=>PL.PDFName.of(n);let src;
+  if(info.filter==='/DCTDecode'){const blob=new Blob([obj.contents],{type:'image/jpeg'});src=await new Promise((res,rej)=>{const im=new Image(),url=URL.createObjectURL(blob);im.onload=()=>{URL.revokeObjectURL(url);res(im);};im.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('jpeg'));};im.src=url;});
+    if(src.naturalWidth!==info.w||src.naturalHeight!==info.h)return null;}
+  else{const px=flatePixels(obj,info);if(!px)return null;src=pixelsToCanvas(px,info);}
+  const sm=obj.dict.get(N('SMask'));let full=null,oldMaskLen=0;
+  if(sm instanceof PL.PDFRef){   // colour and transparency are shrunk TOGETHER, otherwise the hidden background colour bleeds into the edges
+    const ms=doc.context.lookup(sm),mi=ms&&ms.dict?imgInfo(ms.dict):null;if(!mi||mi.comps!==1||mi.palette||ms.dict.lookup(N('Matte')))return null;
+    const mp=flatePixels(ms,mi);if(!mp)return null;oldMaskLen=ms.contents.length;
+    full=document.createElement('canvas');full.width=info.w;full.height=info.h;const fg=full.getContext('2d',{willReadFrequently:true});fg.drawImage(src,0,0,info.w,info.h);
+    let mc=pixelsToCanvas(mp,mi);if(mi.w!==info.w||mi.h!==info.h){const t=document.createElement('canvas');t.width=info.w;t.height=info.h;const tg=t.getContext('2d');tg.imageSmoothingQuality='high';tg.drawImage(mc,0,0,info.w,info.h);mc=t;}
+    const fd=fg.getImageData(0,0,info.w,info.h),md=mc.getContext('2d').getImageData(0,0,info.w,info.h).data;for(let i=0;i<info.w*info.h;i++)fd.data[i*4+3]=md[i*4];fg.putImageData(fd,0,0);
+  }
+  return{src,full,sm,oldMaskLen};
+}
+async function encodeImage(P,info,scale,q){
+  const tw=Math.max(1,Math.round(info.w*scale)),th=Math.max(1,Math.round(info.h*scale));
+  if(!P.full)return{tw,th,g8:null,jpg:new Uint8Array(await(await blobOf(downscale(P.src,tw,th),'image/jpeg',q)).arrayBuffer())};
+  const sc=downscale(P.full,tw,th,true),sg=sc.getContext('2d',{willReadFrequently:true}),sd=sg.getImageData(0,0,tw,th),D=sd.data,n=tw*th,g8=new Uint8Array(n);
+  let known=new Uint8Array(n),ar=0,ag=0,ab=0,an=0;for(let i=0;i<n;i++){g8[i]=D[i*4+3];if(g8[i]>=24){known[i]=1;ar+=D[i*4];ag+=D[i*4+1];ab+=D[i*4+2];an++;}}
+  // give fully transparent pixels the colour of their nearest visible neighbours, so JPEG has no hard colour edge to smear
+  for(let pass=0;pass<12;pass++){const add=[];for(let y=0;y<th;y++)for(let x=0;x<tw;x++){const i=y*tw+x;if(known[i])continue;let r=0,g=0,b2=0,c=0;
+      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const yy=y+dy,xx=x+dx;if(yy<0||yy>=th||xx<0||xx>=tw)continue;const k=yy*tw+xx;if(known[k]){r+=D[k*4];g+=D[k*4+1];b2+=D[k*4+2];c++;}}
+      if(c){D[i*4]=r/c;D[i*4+1]=g/c;D[i*4+2]=b2/c;add.push(i);}}if(!add.length)break;for(const i of add)known[i]=1;}
+  const mr=an?ar/an:255,mg=an?ag/an:255,mb=an?ab/an:255;for(let i=0;i<n;i++){if(!known[i]){D[i*4]=mr;D[i*4+1]=mg;D[i*4+2]=mb;}D[i*4+3]=255;}
+  sg.putImageData(sd,0,0);return{tw,th,g8,jpg:new Uint8Array(await(await blobOf(sc,'image/jpeg',q)).arrayBuffer())};
+}
+// ext.dry = only measure (nothing is changed); ext.only = set of object refs to consider; ext.cache = decoded pictures; ext.use = result of compressScan
+async function compressImages(doc,opt,ext={}){
+  const N=n=>PL.PDFName.of(n),use=ext.use||compressScan(doc),R={images:0,changed:0,saved:0,skipped:0};
+  const maskUse=new Map();for(const[,ob]of doc.context.enumerateIndirectObjects()){if(ob instanceof PL.PDFRawStream){const m=ob.dict.get(N('SMask'));if(m instanceof PL.PDFRef)maskUse.set(m.toString(),(maskUse.get(m.toString())||0)+1);}}   // a mask used by one picture only can be removed when replaced
   for(const[ref,obj]of doc.context.enumerateIndirectObjects()){
-    if(!(obj instanceof PL.PDFRawStream))continue;const u=use.get(ref.toString());if(!u)continue;
+    if(!(obj instanceof PL.PDFRawStream))continue;const key=ref.toString();if(ext.only&&!ext.only.has(key))continue;const u=use.get(key);if(!u)continue;
     let info=null;try{info=imgInfo(obj.dict);}catch(e){}if(!info){R.skipped++;continue;}R.images++;
     const oldLen=obj.contents.length;if(oldLen<30000)continue;
     const scale=Math.min(1,Math.max((u[0]/72*opt.dpi)/info.w,(u[1]/72*opt.dpi)/info.h));
     if(info.filter==='/DCTDecode'&&scale>.85)continue;
     try{
-      let src;
-      if(info.filter==='/DCTDecode'){const blob=new Blob([obj.contents],{type:'image/jpeg'});src=await new Promise((res,rej)=>{const im=new Image(),url=URL.createObjectURL(blob);im.onload=()=>{URL.revokeObjectURL(url);res(im);};im.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('jpeg'));};im.src=url;});
-        if(src.naturalWidth!==info.w||src.naturalHeight!==info.h)continue;}
-      else{const px=flatePixels(obj,info);if(!px){R.skipped++;continue;}src=pixelsToCanvas(px,info);}
-const tw=Math.max(1,Math.round(info.w*scale)),th=Math.max(1,Math.round(info.h*scale));const sm=obj.dict.get(N('SMask'));
-let jpg,newMask=null,oldMaskLen=0;
-if(sm instanceof PL.PDFRef){
-  // Picture with transparency: shrink colour and transparency TOGETHER, otherwise the hidden background colour bleeds into the edges.
-  const ms=doc.context.lookup(sm),mi=ms&&ms.dict?imgInfo(ms.dict):null;if(!mi||mi.comps!==1||mi.palette||ms.dict.lookup(N('Matte'))){R.skipped++;continue;}
-  const mp=flatePixels(ms,mi);if(!mp){R.skipped++;continue;}oldMaskLen=ms.contents.length;
-  const full=document.createElement('canvas');full.width=info.w;full.height=info.h;const fg=full.getContext('2d',{willReadFrequently:true});fg.drawImage(src,0,0,info.w,info.h);
-  let mc=pixelsToCanvas(mp,mi);if(mi.w!==info.w||mi.h!==info.h){const t=document.createElement('canvas');t.width=info.w;t.height=info.h;const tg=t.getContext('2d');tg.imageSmoothingQuality='high';tg.drawImage(mc,0,0,info.w,info.h);mc=t;}
-  const fd=fg.getImageData(0,0,info.w,info.h),md=mc.getContext('2d').getImageData(0,0,info.w,info.h).data;for(let i=0;i<info.w*info.h;i++)fd.data[i*4+3]=md[i*4];fg.putImageData(fd,0,0);
-  const sc=downscale(full,tw,th,true),sg=sc.getContext('2d',{willReadFrequently:true}),sd=sg.getImageData(0,0,tw,th),D=sd.data,n=tw*th,g8=new Uint8Array(n);
-  let known=new Uint8Array(n),ar=0,ag=0,ab=0,an=0;for(let i=0;i<n;i++){g8[i]=D[i*4+3];if(g8[i]>=24){known[i]=1;ar+=D[i*4];ag+=D[i*4+1];ab+=D[i*4+2];an++;}}
-  // give fully transparent pixels the colour of their nearest visible neighbours, so JPEG has no hard colour edge to smear
-  for(let pass=0;pass<12;pass++){const add=[];for(let y=0;y<th;y++)for(let x=0;x<tw;x++){const i=y*tw+x;if(known[i])continue;let r=0,g=0,b2=0,c=0;
-      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const yy=y+dy,xx=x+dx;if(yy<0||yy>=th||xx<0||xx>=tw)continue;const q=yy*tw+xx;if(known[q]){r+=D[q*4];g+=D[q*4+1];b2+=D[q*4+2];c++;}}
-      if(c){D[i*4]=r/c;D[i*4+1]=g/c;D[i*4+2]=b2/c;add.push(i);}}if(!add.length)break;for(const i of add)known[i]=1;}
-  const mr=an?ar/an:255,mg=an?ag/an:255,mb=an?ab/an:255;for(let i=0;i<n;i++){if(!known[i]){D[i*4]=mr;D[i*4+1]=mg;D[i*4+2]=mb;}D[i*4+3]=255;}
-  sg.putImageData(sd,0,0);jpg=new Uint8Array(await(await blobOf(sc,'image/jpeg',opt.q)).arrayBuffer());
-  newMask=doc.context.flateStream(g8,{Type:'XObject',Subtype:'Image',Width:tw,Height:th,ColorSpace:'DeviceGray',BitsPerComponent:8});
-}else jpg=new Uint8Array(await(await blobOf(downscale(src,tw,th),'image/jpeg',opt.q)).arrayBuffer());
-const newLen=jpg.length+(newMask?newMask.getContentsSize():0);
-if(newLen>(oldLen+oldMaskLen)*.85)continue;   // not worth it — keep the original untouched
-const lit={Type:'XObject',Subtype:'Image',Width:tw,Height:th,ColorSpace:'DeviceRGB',BitsPerComponent:8,Filter:'DCTDecode'};
-if(newMask)lit.SMask=doc.context.register(newMask);else if(sm)lit.SMask=sm;
-doc.context.assign(ref,doc.context.stream(jpg,lit));R.changed++;R.saved+=oldLen+oldMaskLen-newLen;
+      let P=ext.cache?ext.cache.get(key):undefined;
+      if(P===undefined){P=await prepImage(doc,obj,info);if(ext.cache){ext.cache.px=(ext.cache.px||0)+info.w*info.h;if(ext.cache.px<90e6)ext.cache.set(key,P);}}
+      if(!P){R.skipped++;continue;}
+      const E=await encodeImage(P,info,scale,opt.q);
+      const newMask=E.g8?doc.context.flateStream(E.g8,{Type:'XObject',Subtype:'Image',Width:E.tw,Height:E.th,ColorSpace:'DeviceGray',BitsPerComponent:8}):null;
+      const newLen=E.jpg.length+(newMask?newMask.getContentsSize():0);
+      if(newLen>(oldLen+P.oldMaskLen)*.85)continue;   // not worth it — keep the original untouched
+      const sharedMask=newMask&&P.sm instanceof PL.PDFRef&&maskUse.get(P.sm.toString())!==1;   // a shared mask has to stay in the file
+      R.changed++;R.saved+=oldLen+(sharedMask?0:P.oldMaskLen)-newLen;if(ext.dry)continue;
+      const lit={Type:'XObject',Subtype:'Image',Width:E.tw,Height:E.th,ColorSpace:'DeviceRGB',BitsPerComponent:8,Filter:'DCTDecode'};
+      if(newMask){lit.SMask=doc.context.register(newMask);if(P.sm instanceof PL.PDFRef&&maskUse.get(P.sm.toString())===1)doc.context.delete(P.sm);}else if(P.sm)lit.SMask=P.sm;
+      doc.context.assign(ref,doc.context.stream(E.jpg,lit));
     }catch(e){R.skipped++;console.warn('Folio: picture kept as is',e);}
   }
   return R;
 }
 function compressDialog(){
-  const d=curDoc();if(!d)return toast('Open a PDF first');endEdit();
-  const M=modal('Save compressed copy',`<div class="tip" style="margin-bottom:10px">Makes the PDF smaller by shrinking the <b>pictures</b> inside it. Text, lines and your edits stay exactly as sharp. PDFs that are mostly text will not get much smaller.</div>
-    <div class="prow"><label>Quality</label><select id="cpQ" style="flex:1"><option value="220,.86">Good — nearly identical at normal size (recommended)</option><option value="150,.8">Smaller — fine on screen, slightly soft when zoomed in</option><option value="96,.65">Smallest — for email, pictures look soft</option></select></div>
-    <div class="tip" style="margin-top:8px">Folio saves a separate copy; your open document is not changed.</div>`);
+  if(document.querySelector('#cpBody'))return;   // one compress window at a time
+  const d=curDoc();if(!d)return toast('Open a PDF first');endEdit();let alive=true;
+  const M=modal('Save compressed copy',`<div id="cpBody"><div class="tip">Measuring this PDF…</div></div>`,{onClose:()=>{alive=false;}});
+  M.btn('Cancel','',M.close);const go=M.btn('Save compressed copy','pri',()=>save());go.disabled=true;
+  const LV=[['Best',0],['Good',.25],['Medium',.5],['Low',.75],['Lowest',1]],o={capture:true},cache=new Map(),est={};let normal=null,use=null,target=null;
+  const look=dpi=>dpi>=200?'very sharp':dpi>=140?'sharp':dpi>=100?'fine on screen':dpi>=70?'soft when zoomed':'visibly soft';
+  const pct=n=>Math.max(0,Math.round((1-n/normal.length)*100));
+  const estimate=async t=>{const k=t.toFixed(4);if(!est[k]){const R=await compressImages(o.doc,compressLevel(t),{dry:true,only:o.preRefs,cache,use});est[k]={size:normal.length-R.saved,changed:R.changed,images:R.images};}return est[k];};
+  const limitBytes=()=>{const v=parseFloat(M.$('#cpT').value),u=M.$('#cpU').value;if(!(v>0))return null;return u==='MB'?v*1048576:u==='KB'?v*1024:normal.length*v/100;};
+  // best quality whose estimate fits under the limit (3% safety margin)
+  const findLevel=async lim=>{const L=lim*.97;const e0=await estimate(0);if(e0.size<=L)return{t:0,e:e0};const e1=await estimate(1);if(e1.size>L)return{t:null,floor:e1.size};
+    let lo=0,hi=1;for(let i=0;i<6;i++){const mid=(lo+hi)/2;if((await estimate(mid)).size<=L)hi=mid;else lo=mid;}return{t:hi,e:await estimate(hi)};};
+  let tmr=null;const retarget=()=>{clearTimeout(tmr);target=null;const out=M.$('#cpTR');const lim=limitBytes();if(!lim){out.textContent='';return;}out.textContent='calculating…';M.$('#cpTg').checked=true;
+    tmr=setTimeout(async()=>{const r=await findLevel(lim);if(!alive||limitBytes()!==lim)return;target={lim,...r};
+      out.innerHTML=r.t==null?`<span style="color:var(--accent)">Not possible — the smallest Folio can make this PDF is about ${fmtSize(r.floor)}.</span>`:`≈ <b>${fmtSize(r.e.size)}</b> · ${pct(r.e.size)}% smaller · pictures ≈ ${compressLevel(r.t).dpi} dpi (${look(compressLevel(r.t).dpi)})`;},450);};
+  (async()=>{
+    try{normal=await buildPdf(d,o);use=compressScan(o.doc);}catch(e){if(alive)M.$('#cpBody').innerHTML=`<div class="tip" style="color:var(--accent)">Could not measure this PDF: ${esc(e.message||String(e))}</div>`;return;}
+    if(!alive)return;
+    M.$('#cpBody').innerHTML=`<div class="tip" style="margin-bottom:8px">This PDF is now <b>${fmtSize(normal.length)}</b>. Folio makes it smaller by shrinking the <b>pictures</b> inside it; text, lines and your edits stay sharp. Sizes below are estimates.</div>
+      ${LV.map(([n,t],i)=>`<label class="cprow"><input type="radio" name="cp" value="${t}" ${t===.25?'checked':''}><span>${n}</span><span class="s" id="cpS${i}">…</span><span class="p" id="cpP${i}"></span><span class="d">pictures ≈ ${compressLevel(t).dpi} dpi · ${look(compressLevel(t).dpi)}</span></label>`).join('')}
+      <label class="cprow tg"><input type="radio" name="cp" value="target" id="cpTg"><span>Smaller than</span><input type="number" id="cpT" min="0" step="any" placeholder="e.g. 2"><select id="cpU"><option>MB</option><option>KB</option><option value="%">% of now</option></select><span class="d" id="cpTR"></span></label>
+      <div class="tip" style="margin-top:8px">Folio saves a separate copy; your open document is not changed.</div>`;
+    M.$('#cpT').oninput=retarget;M.$('#cpU').onchange=retarget;
+    for(let i=0;i<LV.length;i++){const e=await estimate(LV[i][1]);if(!alive)return;const gain=e.size<normal.length*.95;
+      M.$('#cpS'+i).textContent=gain?'≈ '+fmtSize(e.size):fmtSize(normal.length);M.$('#cpP'+i).textContent=gain?pct(e.size)+'% smaller':'no real gain';await new Promise(r=>setTimeout(r,0));}
+    go.disabled=false;
+  })();
+  async function save(){
+    const selEl=M.bg.querySelector('input[name=cp]:checked');if(!selEl)return toast('Choose a quality level first');const sel=selEl.value;let t,lim=null;
+    if(sel==='target'){lim=limitBytes();if(!lim)return toast('Type the size you need, for example 2 MB');if(!target||target.lim!==lim)return toast('Still calculating — try again in a moment');
+      if(target.t==null)return toast(`This PDF cannot get that small — the smallest possible is about ${fmtSize(target.floor)}.`,6000);t=target.t;}
+    else t=+sel;
+    M.close();let out,res;
+    try{for(let k=0;k<6;k++){busy(true,k?'Trying a little smaller…':'Shrinking pictures…');const oo={compress:compressLevel(t)};out=await buildPdf(d,oo);res=oo.result;if(lim==null||out.length<=lim||t>=1)break;t=Math.min(1,t+.1);}}
+    catch(e){busy(false);return toast('Could not compress: '+(e.message||e),6000);}finally{busy(false);}
+    if(lim!=null&&out.length>lim){const R=modal('Could not reach that size',`<div class="tip">The smallest Folio could make this PDF is <b>${fmtSize(out.length)}</b>, which is above your limit of ${fmtSize(lim)}. The rest of the file is text, drawings or picture types Folio leaves untouched.</div>`);R.btn('Cancel','',R.close);R.btn('Save it anyway','pri',()=>{R.close();finish();});return;}
+    if(lim==null&&out.length>normal.length*.95){const R=modal('Nothing to gain',`<div style="font-weight:600;margin-bottom:6px">This PDF is already compact (${fmtSize(normal.length)}).</div><div class="tip">${res&&res.images?'Its pictures are already small or efficiently stored at this quality — try a lower level.':'It has no pictures Folio can shrink — it is mostly text and drawings.'}</div>`);R.btn('OK','pri',R.close);return;}
+    finish();
+    async function finish(){const p=await saveBlobAs(new Blob([out],{type:'application/pdf'}),d.name.replace(/-compressed$/,'')+'-compressed.pdf');
+      if(p!==null&&p!==undefined)toast(`Saved compressed copy: ${fmtSize(normal.length)} → ${fmtSize(out.length)} (${pct(out.length)}% smaller)`,7000);}
+  }
+}
+/* ================= export pages (like Acrobat's Extract Pages) ================= */
+function parseRanges(str,n){   // "1-3, 5, 8-" -> sorted 0-based page indices, or null if it cannot be read
+  const out=new Set();const parts=String(str).replace(/\s*-\s*/g,'-').split(/[,;\s]+/).filter(Boolean);if(!parts.length)return null;
+  for(const p of parts){const m=/^(\d+)?(-)?(\d+)?$/.exec(p);if(!m||(!m[1]&&!m[3]))return null;const a=m[1]?+m[1]:1,b=m[2]?(m[3]?+m[3]:n):a;if(a<1||b>n||a>b)return null;for(let k=a;k<=b;k++)out.add(k-1);}
+  return[...out].sort((x,y)=>x-y);
+}
+function fmtRanges(idx){const out=[];for(let i=0;i<idx.length;i++){let j=i;while(j+1<idx.length&&idx[j+1]===idx[j]+1)j++;out.push(j>i?`${idx[i]+1}-${idx[j]+1}`:String(idx[i]+1));i=j;}return out.join(', ');}
+function exportPagesDialog(){
+  const d=curDoc();if(!d)return toast('Open a PDF first');endEdit();const n=d.pages.length;
+  const pre=d.pageSel&&d.pageSel.size?[...d.pageSel].filter(i=>i<n).sort((a,b)=>a-b):[S.curPage];
+  const M=modal('Export pages',`<div class="prow"><label>Pages</label><input id="xpR" style="flex:1" value="${fmtRanges(pre)}" placeholder="e.g. 1-3, 5, 8-"><button class="mini" id="xpAll">All</button></div>
+    <div class="tip" id="xpInfo" style="margin:-2px 0 10px"></div>
+    <label style="display:block;margin:6px 0"><input type="radio" name="xpM" value="one" checked> As <b>one PDF</b> containing these pages</label>
+    <label style="display:block;margin:6px 0"><input type="radio" name="xpM" value="each"> As <b>separate PDFs</b>, one file for each page</label>
+    <label style="display:block;margin:12px 0 4px"><input type="checkbox" id="xpDel"> Delete these pages from this document after exporting</label>
+    <div class="tip">Exported pages include your edits. Tip: in the Pages panel, ${K('⌘')}-click or ${K('Shift')}-click thumbnails to choose pages first.</div>`);
+  const info=()=>{const idx=parseRanges(M.$('#xpR').value,n);M.$('#xpInfo').innerHTML=idx?`${idx.length} of ${n} page${n>1?'s':''} selected`:`<span style="color:var(--accent)">Type page numbers between 1 and ${n}, for example 1-3, 5</span>`;M.$('#xpDel').disabled=!idx||idx.length>=n;if(M.$('#xpDel').disabled)M.$('#xpDel').checked=false;return idx;};
+  M.$('#xpR').oninput=info;M.$('#xpAll').onclick=()=>{M.$('#xpR').value=n>1?`1-${n}`:'1';info();};info();
   M.btn('Cancel','',M.close);
-  M.btn('Compress','pri',async()=>{
-    const[dpi,q]=M.$('#cpQ').value.split(',').map(Number);M.close();let normal,small,o={compress:{dpi,q}};
-    try{busy(true,'Measuring the PDF…');normal=await buildPdf(d);busy(true,'Shrinking pictures…');small=await buildPdf(d,o);}catch(e){busy(false);return toast('Could not compress: '+(e.message||e),6000);}finally{busy(false);}
-    const r=o.result||{images:0,changed:0};const pct=Math.round((1-small.length/normal.length)*100);
-    if(small.length>normal.length*.95){const R=modal('Nothing to gain',`<div style="font-weight:600;margin-bottom:6px">This PDF is already compact (${fmtSize(normal.length)}).</div><div class="tip">${r.images?`Its ${r.images} picture${r.images>1?'s are':' is'} already small or efficiently stored at this quality.`:'It has no pictures Folio can shrink — it is mostly text and drawings.'} ${dpi>72?'A lower quality setting may still help.':''}</div>`);R.btn('OK','pri',R.close);return;}
-    const p=await saveBlobAs(new Blob([small],{type:'application/pdf'}),d.name.replace(/-compressed$/,'')+'-compressed.pdf');
-    if(p!==null&&p!==undefined)toast(`Saved compressed copy: ${fmtSize(normal.length)} → ${fmtSize(small.length)} (${pct}% smaller, ${r.changed} picture${r.changed===1?'':'s'} shrunk)`,7000);
+  M.btn('Export','pri',async()=>{
+    const idx=info();if(!idx)return toast('Check the page numbers');const each=M.bg.querySelector('input[name=xpM]:checked').value==='each',del=M.$('#xpDel').checked;M.close();
+    const sub=list=>({name:d.name,pages:list.map(i=>d.pages[i]),formVals:d.formVals});let done=0,last=null;
+    try{
+      if(!each||idx.length===1){busy(true,'Building the PDF…');const bytes=await buildPdf(sub(idx));busy(false);
+        const p=await saveBlobAs(new Blob([bytes],{type:'application/pdf'}),`${d.name}-page${idx.length>1?'s':''}-${fmtRanges(idx).replace(/, /g,'_')}.pdf`);if(p===null||p===undefined)return;done=idx.length;}
+      else{let dir=null;if(NATIVE){dir=await nativeCall({cmd:'pickFolder',message:'Choose where to save the separate PDFs'});if(!dir)return;}
+        const w=String(n).length;for(const i of idx){busy(true,`Exporting page ${i+1}…`);const bytes=await buildPdf(sub([i]));const name=`${d.name}-page-${String(i+1).padStart(w,'0')}.pdf`;
+          if(NATIVE)last=await nativeCall({cmd:'writeFile',dir,name,data:toB64(bytes)});else await saveBlobAs(new Blob([bytes],{type:'application/pdf'}),name);done++;}}
+    }catch(e){busy(false);return toast('Export failed: '+(e.message||e),6000);}finally{busy(false);}
+    if(del&&done===idx.length&&idx.length<n){pushUndo();const drop=new Set(idx);d.pages=d.pages.filter((_,i)=>!drop.has(i));d.pageSel=new Set();S.curPage=Math.min(S.curPage,d.pages.length-1);S.sel=null;buildViewer();renderSide();renderProps();}
+    toast(each&&idx.length>1?`Exported ${done} separate PDFs`:`Exported ${done} page${done>1?'s':''} as one PDF`+(del?' and removed them from this document':''),5000);if(NATIVE&&last)nativeCall({cmd:'reveal',path:last});
   });
 }
-/* ================= Tools: export images, save with password, batch sign ================= */
-const blobOf=(c,type,q)=>new Promise(r=>c.toBlob(r,type,q));
-async function blobB64(b){return toB64(new Uint8Array(await b.arrayBuffer()));}
+function updatePageSelBar(){
+  const d=curDoc(),bar=document.querySelector('#pselBar');if(!bar||!d)return;const ps=d.pageSel||new Set();
+  bar.innerHTML=ps.size>1?`<b>${ps.size} pages selected</b><button class="mini" id="psExp">${icon('extract')} Export…</button><button class="mini" id="psClr">Clear</button>`:`<span class="tip">${K('⌘')}-click or ${K('Shift')}-click to select several pages</span>`;
+  const e=bar.querySelector('#psExp');if(e)e.onclick=exportPagesDialog;const c=bar.querySelector('#psClr');if(c)c.onclick=()=>{d.pageSel=new Set();highlightThumb();};
+}
 function exportImagesDialog(){
   const d=curDoc();if(!d)return toast('Open a PDF first');endEdit();
   const M=modal('Export pages as images',`<div class="prow"><label>Pages</label><select id="xiPages"><option value="all">All ${d.pages.length} pages</option><option value="cur">Only page ${S.curPage+1}</option></select></div>
@@ -1957,7 +2055,7 @@ function batchSignDialog(){
   });
 }
 /* ================= Info: tutorial, about, ideas & feedback ================= */
-const APP_VERSION='2.5.0';
+const APP_VERSION='2.6.0';
 const NEEDS_NATIVE=1;   // lowest native shell level this web part needs (see Updater.nativeLevel); raise both when the bridge changes
 const appVersion=()=>window.FOLIO_BUILD?`${APP_VERSION} (build ${window.FOLIO_BUILD})`:`${APP_VERSION} (web)`;
 const K=(...k)=>k.map(x=>`<span class="kbd">${x}</span>`).join('+');
@@ -1970,10 +2068,10 @@ const TUTORIAL=[
   {id:'copy',t:'Copy an element to another PDF',gif:'copy',steps:[`Choose <b>Copy element</b> ${K('C')} and drag a box around a signature, logo or stamp.`,`The white background is removed automatically — click <b>Copy</b>.`,`Switch to the other document tab and press ${K('⌘','V')}. It lands in the same place and size.`],sign:['C — copy element','⌘V — paste']},
   {id:'ocr',t:'Edit scanned pages (OCR)',gif:'',steps:[`A scanned or photographed page is a picture, so there is no text to click. Choose <b>File ▸ Recognise Text (OCR)…</b> (or <b>Tools ▸ Recognise text</b>). It runs on your Mac; nothing is uploaded.`,`Blue boxes now appear around each recognised line. Click one and type, as with a normal PDF.`,`Folio repaints the paper behind the old letters and retypes the line in the closest-looking font. On clean white paper this is hard to spot; on textured, coloured or photographed paper you may see a soft patch. Check <b>Font for new letters</b> if the font looks off.`,`When you save, all recognised text is added invisibly, so the scan becomes searchable and copyable in any PDF reader.`,`Recognition makes mistakes on small, blurry or handwritten text — read the line before you rely on it.`],sign:['Scan = picture','OCR first, then E']},
   {id:'forms',t:'Fill in forms & searchable text',gif:'',steps:[`<b>Forms:</b> when a PDF has form fields they appear as light-blue boxes. Click one and type; tick boxes and lists work too. ${K('Tab')} jumps to the next field.`,`When you save, your answers are printed into the page. The saved PDF shows them everywhere, but its fields can no longer be changed by other apps — keep your original if you need a blank form.`,`<b>Searchable text:</b> text you edit or add stays findable. Even when Folio stores the letters as a sharp picture (to keep the exact font), it adds invisible real text on top, so search, select and copy work in any PDF reader.`,`Letters outside the Western alphabet are searchable only approximately.`],sign:['Tab — next field','Blue box = form field']},
-  {id:'batch',t:'Batch sign, pictures & password',gif:'',steps:[`<b>Batch sign:</b> place your signature on one PDF, select it, and click <b>Apply to many PDFs…</b>. Choose the PDFs, then a folder. Folio saves signed copies (<i>name-signed.pdf</i>) — originals are never changed. Always check a few results.`,`<b>Export pages as images:</b> File ▸ Export Pages as Images… (${K('⇧','⌘','E')}). Choose PNG or JPG and the quality; each page becomes one picture.`,`<b>Save with password:</b> File ▸ Save with Password…. Folio saves a protected copy that asks for the password when opened. A forgotten password cannot be recovered.`,`<b>Compress:</b> File ▸ Save Compressed Copy…. Shrinks the pictures inside the PDF and saves a smaller copy; text and your edits stay sharp. Mostly-text PDFs gain little — Folio tells you when there is nothing to gain.`,`All of these are also under <b>Tools</b> in the right-hand panel when nothing is selected.`],sign:['⇧⌘E — export images','Originals stay untouched']},
+  {id:'batch',t:'Batch sign, pictures & password',gif:'',steps:[`<b>Batch sign:</b> place your signature on one PDF, select it, and click <b>Apply to many PDFs…</b>. Choose the PDFs, then a folder. Folio saves signed copies (<i>name-signed.pdf</i>) — originals are never changed. Always check a few results.`,`<b>Export pages as images:</b> File ▸ Export Pages as Images… (${K('⇧','⌘','E')}). Choose PNG or JPG and the quality; each page becomes one picture.`,`<b>Save with password:</b> File ▸ Save with Password…. Folio saves a protected copy that asks for the password when opened. A forgotten password cannot be recovered.`,`<b>Compress:</b> File ▸ Save Compressed Copy…. Folio shows the estimated size for each quality level. Need it under a limit? Choose <b>Smaller than</b> and type the size (for example 2 MB) — Folio finds the best quality that fits, or tells you if that size is not possible. Text and your edits stay sharp; only pictures are shrunk.`,`<b>Export pages:</b> in the <b>Pages</b> panel, ${K('⌘')}-click or ${K('Shift')}-click the pages you want, then <b>Export…</b> (or <b>Tools ▸ Export pages</b> and type a range such as 1-3, 5). Save them as one PDF or as a separate PDF for each page; optionally delete them from the document afterwards.`,`All of these are also under <b>Tools</b> in the right-hand panel when nothing is selected.`],sign:['⇧⌘E — export images','Originals stay untouched']},
   {id:'save',t:'Open, save & print',gif:'',steps:[`${K('⌘','O')} opens PDFs — or drag them onto the window or the Dock icon. Several PDFs open as tabs.`,`${K('⌘','S')} saves straight back to the same file. ${K('⇧','⌘','S')} saves a copy under a new name.`,`${K('⌘','P')} prints. Pinch or ${K('⌘','+')} / ${K('⌘','−')} zooms; hold ${K('Space')} and drag to pan.`,`The <b>Pages</b> panel on the left reorders (drag), rotates, duplicates, deletes and inserts pages.`],sign:['⌘S — save in place','⌘Z — undo']},
 ];
-const CHANGELOG=[['2.5','Online updates: Folio can update itself, with a signature check and automatic rollback'],['2.4','Save a compressed copy: shrinks the pictures inside large PDFs'],['2.3','Recognise text in scanned pages (OCR): edit scanned lines and make scans searchable'],['2.2','Fill in PDF form fields; edited text stays searchable and selectable in the saved PDF'],['2.1','Batch sign many PDFs at once; export pages as PNG or JPG pictures; save a password-protected copy'],['2.0','Move, resize and align text (left, centre, right, justify); Info window with tutorial'],['1.6','Select, move and delete lines, shapes and pictures that are part of the PDF'],['1.5','Works with Keynote and Canva PDFs; exact fonts installed on your Mac or added from a font file'],['1.4','Text is removed from the PDF instead of covered; tabs keep their spacing; 85-font library with look-alike matching'],['1.3','Crop pictures; remove book lines from signature photos'],['1.2','⌘S saves in place; smoother pinch zoom; zoom layout fix'],['1.1','Native Mac app with offline libraries'],['1.0','First version: edit text, sign, copy elements, mark up, organise pages']];
+const CHANGELOG=[['2.6','Compress to a size you choose, with estimated sizes for each quality level; export selected pages as one PDF or as separate PDFs'],['2.5','Online updates: Folio can update itself, with a signature check and automatic rollback'],['2.4','Save a compressed copy: shrinks the pictures inside large PDFs'],['2.3','Recognise text in scanned pages (OCR): edit scanned lines and make scans searchable'],['2.2','Fill in PDF form fields; edited text stays searchable and selectable in the saved PDF'],['2.1','Batch sign many PDFs at once; export pages as PNG or JPG pictures; save a password-protected copy'],['2.0','Move, resize and align text (left, centre, right, justify); Info window with tutorial'],['1.6','Select, move and delete lines, shapes and pictures that are part of the PDF'],['1.5','Works with Keynote and Canva PDFs; exact fonts installed on your Mac or added from a font file'],['1.4','Text is removed from the PDF instead of covered; tabs keep their spacing; 85-font library with look-alike matching'],['1.3','Crop pictures; remove book lines from signature photos'],['1.2','⌘S saves in place; smoother pinch zoom; zoom layout fix'],['1.1','Native Mac app with offline libraries'],['1.0','First version: edit text, sign, copy elements, mark up, organise pages']];
 const IDEAS=['A proper redaction tool that permanently removes sensitive content','Digital certificate signatures (verifiable signing)','Export to Word'];
 /* Feedback → Google Form → Google Sheet. The form link can be built in (DEFAULT_FEEDBACK_FORM)
    or pasted in Info ▸ Ideas & feedback. Entries are also kept on this Mac and re-sent when offline. */
@@ -2189,6 +2287,7 @@ async function buildPdf(d,opt){
   }
   out.setProducer('Folio PDF Editor');out.setTitle(d.name);
   if(opt&&opt.compress)opt.result=await compressImages(out,opt.compress);
+  if(opt&&opt.capture){opt.doc=out;opt.preRefs=new Set(out.context.enumerateIndirectObjects().map(([r])=>r.toString()));}   // for size estimates: only objects that exist before saving
   return out.save();
 }
 async function saveDoc(asNew){

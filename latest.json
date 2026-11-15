@@ -1,9 +1,9 @@
 {
-  "version": "2.5.0",
+  "version": "2.6.0",
   "minNative": 1,
-  "notes": "First version with online updates",
+  "notes": "Compress to a size you choose, with estimated sizes; export selected pages as one PDF or separate PDFs",
   "dmg": "",
-  "published": "2026-11-15T09:42:11Z",
+  "published": "2026-11-15T10:18:13Z",
   "files": [
     {
       "path": "fontlib/archivonarrow_v35_tss0ApVBdCYD5Q7hcxTE1ArZ0bb-iXxw2d8oBxk.woff2",
@@ -937,8 +937,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "fb51a58aa0b8850ac7ca556880d0b77fc04f09508f0645b5a8568154fbcde934",
-      "size": 243913
+      "sha256": "341395519e18d9bd3aabef0c7910ad6ceccb72aa5eaf6568ecbbfc374d353aed",
+      "size": 256440
     },
     {
       "path": "lib/pdf-lib.min.js",

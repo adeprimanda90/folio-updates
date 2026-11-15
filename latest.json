@@ -1,9 +1,9 @@
 {
-  "version": "2.6.0",
+  "version": "2.6.1",
   "minNative": 1,
-  "notes": "Compress to a size you choose, with estimated sizes; export selected pages as one PDF or separate PDFs",
+  "notes": "Compress to any size limit: when shrinking pictures is not enough, Folio warns and can turn pages into pictures instead of refusing",
   "dmg": "",
-  "published": "2026-11-15T10:18:13Z",
+  "published": "2026-11-15T14:50:30Z",
   "files": [
     {
       "path": "fontlib/archivonarrow_v35_tss0ApVBdCYD5Q7hcxTE1ArZ0bb-iXxw2d8oBxk.woff2",
@@ -937,8 +937,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "341395519e18d9bd3aabef0c7910ad6ceccb72aa5eaf6568ecbbfc374d353aed",
-      "size": 256440
+      "sha256": "83f1f5905451fc095591432610d2d10c73f381086f47ef640a94ef108cc58d31",
+      "size": 262432
     },
     {
       "path": "lib/pdf-lib.min.js",

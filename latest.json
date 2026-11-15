@@ -1,0 +1,989 @@
+{
+  "version": "2.5.0",
+  "minNative": 1,
+  "notes": "First version with online updates",
+  "dmg": "",
+  "published": "2026-11-15T09:42:11Z",
+  "files": [
+    {
+      "path": "fontlib/archivonarrow_v35_tss0ApVBdCYD5Q7hcxTE1ArZ0bb-iXxw2d8oBxk.woff2",
+      "sha256": "db821b657f1d6b362a8bbddb4452073d156cea76854a157d3b33b4a999fcebfa",
+      "size": 16580
+    },
+    {
+      "path": "fontlib/archivonarrow_v35_tss0ApVBdCYD5Q7hcxTE1ArZ0bbwiXxw2d8o.woff2",
+      "sha256": "728b32e94fd137eca605f80d3c34adeaeef0d312425c7a5a1ff743407b2d78f9",
+      "size": 18724
+    },
+    {
+      "path": "fontlib/archivonarrow_v35_tss2ApVBdCYD5Q7hcxTE1ArZ0bb1uX563v0qNxg.woff2",
+      "sha256": "a83fb9855f693a83f38c98f45132529a65958bcbd79ded07698c3c67c2af29bd",
+      "size": 21016
+    },
+    {
+      "path": "fontlib/archivonarrow_v35_tss2ApVBdCYD5Q7hcxTE1ArZ0bb1uXB63v0qNxhX5Q.woff2",
+      "sha256": "31c3c62800c4875ee1748f9da50a2850d053c1f54b31f4f9ad329d5912f8544d",
+      "size": 18020
+    },
+    {
+      "path": "fontlib/arimo_v36_P5sCzZCDf9_T_10c9C1kiL2t2dkPJA.woff2",
+      "sha256": "2ffbc4fdbe7d0df635790d770a843d4fef07e169a68f202b0d4510e0ed4b8868",
+      "size": 113280
+    },
+    {
+      "path": "fontlib/arimo_v36_P5sCzZCDf9_T_10c9CNkiL2t2dk.woff2",
+      "sha256": "d1bf9f75851f3ec662d263eed39a8ce905a19ceec7025ffd66ff54e0b6d78be4",
+      "size": 22416
+    },
+    {
+      "path": "fontlib/arimo_v36_P5sMzZCDf9_T_10XxCFuj5-v6dg.woff2",
+      "sha256": "d4c174830339520029d6f116a4418d5775aebf7a61181ddb711841d8e47e4a1e",
+      "size": 97196
+    },
+    {
+      "path": "fontlib/arimo_v36_P5sMzZCDf9_T_10ZxCFuj5-v.woff2",
+      "sha256": "f2dd3a54402a0ab9a8e5d28d80a520996ac5951fef0f610c54116a4947f3b3b4",
+      "size": 20204
+    },
+    {
+      "path": "fontlib/arvo_v23_tDbD2oWUg0MKqScQ7Z7o_vo.woff2",
+      "sha256": "8d344107e41e882422818bda0a76729341a14e47c4e7764bae4e31f2e015c242",
+      "size": 10612
+    },
+    {
+      "path": "fontlib/arvo_v23_tDbM2oWUg0MKoZw1-LPK89D4hAA.woff2",
+      "sha256": "b0f02c443508ee385aa8f90625fc7ceeac8ebe55474fe0791a9438ea3e7ee373",
+      "size": 10668
+    },
+    {
+      "path": "fontlib/arvo_v23_tDbN2oWUg0MKqSIg75Tv3PjyjA.woff2",
+      "sha256": "ca5d893bd27551f1d4916a3ad734cc8926596f6ded9abc2d94e80029199afb35",
+      "size": 11008
+    },
+    {
+      "path": "fontlib/arvo_v23_tDbO2oWUg0MKqSIoVLH68dr_pgL0Gw.woff2",
+      "sha256": "c5675657d8243882f32e1dc2c68c73cc677905ee472a8de9bc2b146c79d66660",
+      "size": 11320
+    },
+    {
+      "path": "fontlib/barlow_v13_7cHpv4kjgoGqM7E_Ass5ynghnQci.woff2",
+      "sha256": "bac411df68fa3d93ee4b12309c4df075c791d0390b536ca8d803890f889b76b4",
+      "size": 9632
+    },
+    {
+      "path": "fontlib/barlow_v13_7cHpv4kjgoGqM7E_DMs5ynghnQ.woff2",
+      "sha256": "7a686e76312866b7d506c103e51a829d4c96a0b4576835128d3b7b53801c095a",
+      "size": 15656
+    },
+    {
+      "path": "fontlib/barlow_v13_7cHqv4kjgoGqM7E3t-4s51ostz0rdg.woff2",
+      "sha256": "98aa8b5c2582107d73a6f1254f08b152b0c037ae5626a902dd44af8c781e0e6d",
+      "size": 15744
+    },
+    {
+      "path": "fontlib/barlow_v13_7cHqv4kjgoGqM7E3t-4s6Vostz0rdom9.woff2",
+      "sha256": "2b0e32435d0c87bc0d68f2522c6a7dceb8a2ac9cd0f8d9df7e5c162f778416c4",
+      "size": 9888
+    },
+    {
+      "path": "fontlib/barlow_v13_7cHrv4kjgoGqM7E_Cfs1wH8DnzcjTrA.woff2",
+      "sha256": "e9d58895aa2459699d9949128a5fb9b905653883bf21d2caee191e9b26389ddd",
+      "size": 10480
+    },
+    {
+      "path": "fontlib/barlow_v13_7cHrv4kjgoGqM7E_Cfs7wH8Dnzcj.woff2",
+      "sha256": "b0c1a6bb98553690544603bb344728e6efee02c5bd04b352e12440591be3e137",
+      "size": 17588
+    },
+    {
+      "path": "fontlib/barlow_v13_7cHsv4kjgoGqM7E_CfOA5WogvToJdLm8BvE.woff2",
+      "sha256": "05e0ea40225d915495b45e0c80d753becc20f5a17888872faf56bef1c0806832",
+      "size": 10588
+    },
+    {
+      "path": "fontlib/barlow_v13_7cHsv4kjgoGqM7E_CfOA5WouvToJdLm8.woff2",
+      "sha256": "fab52d0559785638947742567d71c6bf859d68dcfbbfd39384d8a37e66258f65",
+      "size": 17408
+    },
+    {
+      "path": "fontlib/caladea_v10_kJE0BugZ7AAjhybUvR1FQ98ipcZyJ561DbZg.woff2",
+      "sha256": "1b6ba7233ae4e3fe3e071aad0232746d783dfc8079809aafcd0fd9ec77a3d17d",
+      "size": 9940
+    },
+    {
+      "path": "fontlib/caladea_v10_kJE0BugZ7AAjhybUvR1FQ98iq8ZyJ561DQ.woff2",
+      "sha256": "06b466440368d198360e0ae9e82ba5965c8e9c0a7a3f501628664345e8e015f6",
+      "size": 14692
+    },
+    {
+      "path": "fontlib/caladea_v10_kJE2BugZ7AAjhybUtaNY790Sqcx1BZw.woff2",
+      "sha256": "d194dd15b80f8bf375961774ae918fc5ac4b5f79423ab4f8452025db12f2cd6d",
+      "size": 13452
+    },
+    {
+      "path": "fontlib/caladea_v10_kJE2BugZ7AAjhybUtaNY79MSqcx1BZyFDA.woff2",
+      "sha256": "b54bb1726fa1c6da4a1927f6cfdc606fad134dac805c6f66809af7cd7d12da21",
+      "size": 9304
+    },
+    {
+      "path": "fontlib/caladea_v10_kJExBugZ7AAjhybUvR1N-Po3huR_DQ.woff2",
+      "sha256": "190e6a69c5cc85d17c30e01402453af378b24fa8384ec1c86805977f362c4ee9",
+      "size": 15008
+    },
+    {
+      "path": "fontlib/caladea_v10_kJExBugZ7AAjhybUvR1N9vo3huR_DaS8.woff2",
+      "sha256": "7312869ac6d6580f046a0c95ebbfe02834cc8a74c3d9e516112a7fe02dbfc06c",
+      "size": 9892
+    },
+    {
+      "path": "fontlib/caladea_v10_kJEzBugZ7AAjhybUvRZ9-vAwpOZPDA.woff2",
+      "sha256": "5920182d67d8f99ff7e3bb0da692cafa66ec8e7e6ce510ea233230ef60e19abc",
+      "size": 9400
+    },
+    {
+      "path": "fontlib/caladea_v10_kJEzBugZ7AAjhybUvRh9-vAwpOY.woff2",
+      "sha256": "f888be2ef5578de28d56093313ab9cd256a9b2f352e54bd6f23dfbff48c8d13c",
+      "size": 13648
+    },
+    {
+      "path": "fontlib/carlito_v4_3Jn4SDPw3m-pk039BIykWXQlU8pB2OtLMQ.woff2",
+      "sha256": "3a1a33c3f2a8d1b98f01f867a73a2085ada27df402678a4cd6d1f5016edcf670",
+      "size": 48572
+    },
+    {
+      "path": "fontlib/carlito_v4_3Jn4SDPw3m-pk039BIykWXolU8pB2Os.woff2",
+      "sha256": "3943703a3d692300418f3958be8eff99dd1aa5e5334eac6a9ea9285b07931012",
+      "size": 19224
+    },
+    {
+      "path": "fontlib/carlito_v4_3Jn6SDPw3m-pk039DDK59XgVUcBG-ul7MA.woff2",
+      "sha256": "ba98689c6aef50b79f0460db7b5356d3513e5cb7c20b99e7ff65c2ec3e0889a3",
+      "size": 19520
+    },
+    {
+      "path": "fontlib/carlito_v4_3Jn6SDPw3m-pk039DDK59XgVX8BG-ul7ME1a.woff2",
+      "sha256": "e2c4da3f36204cdc3cc256e277e3bfc8e411ab36cb075e91c5267be6a4eb65a9",
+      "size": 51952
+    },
+    {
+      "path": "fontlib/carlito_v4_3Jn9SDPw3m-pk039DDeBTFcHXuA.woff2",
+      "sha256": "e1bd1446e398916b97b3bb073491d4ff13fe334a0bef7c40aafc01beac2bd5f7",
+      "size": 18748
+    },
+    {
+      "path": "fontlib/carlito_v4_3Jn9SDPw3m-pk039DDmBTFcHXuB70Q.woff2",
+      "sha256": "9691734199298cca3ceda3f6971824ac28a23d208b7fcb47028f41a7f52ac88f",
+      "size": 47644
+    },
+    {
+      "path": "fontlib/carlito_v4_3Jn_SDPw3m-pk039DDKxQF0AfOJL0NNy.woff2",
+      "sha256": "5b56c6287f1d3f4879e1eb1ada2576bc417e90e9569571332188dab4ea72f1b6",
+      "size": 51448
+    },
+    {
+      "path": "fontlib/carlito_v4_3Jn_SDPw3m-pk039DDKxTl0AfOJL0A.woff2",
+      "sha256": "75d9ba43c7d0db564d83302949b7cf5227da59e3747587b181aecfc48a433e02",
+      "size": 19648
+    },
+    {
+      "path": "fontlib/cousine_v31_d6lIkaiiRdih4SpP_SQvzBTu39g.woff2",
+      "sha256": "239eb7721bf6ecda06d7393ce6ea4a631251aac55632a6ac8783b0c601fa344a",
+      "size": 9420
+    },
+    {
+      "path": "fontlib/cousine_v31_d6lIkaiiRdih4SpP_SovzBTu39hchw.woff2",
+      "sha256": "a4f5ee801f93d2a7d04f7b734409b31bd483a9285800dd9b0fba652ca9405375",
+      "size": 34956
+    },
+    {
+      "path": "fontlib/cousine_v31_d6lKkaiiRdih4SpP_SEfwB7p_dpshl1w.woff2",
+      "sha256": "df8dfd2f6b98903753ccb617b9fa04d47f508f0a514996da1d9fedcfd37ce678",
+      "size": 39492
+    },
+    {
+      "path": "fontlib/cousine_v31_d6lKkaiiRdih4SpP_SEfzh7p_dpshg.woff2",
+      "sha256": "fce2fda87c972a234d1a9300a98d0e4c770a45c77318191bb7b0411a50d4ca62",
+      "size": 10276
+    },
+    {
+      "path": "fontlib/cousine_v31_d6lNkaiiRdih4SpP9Z8K2TfM0vJmjmVJOA.woff2",
+      "sha256": "80b700b1ceb7f60d7eab0bced62156eac7000d29265ec05730d3543236139cd7",
+      "size": 34724
+    },
+    {
+      "path": "fontlib/cousine_v31_d6lNkaiiRdih4SpP9Z8K2TnM0vJmjmU.woff2",
+      "sha256": "13cf61f6bd507000e08243cb56be2be894d8b4c200bad4c106865e0f1d94bf7c",
+      "size": 9428
+    },
+    {
+      "path": "fontlib/cousine_v31_d6lPkaiiRdih4SpP_SEXdTv80PhhrGd5OQ.woff2",
+      "sha256": "1f1cb2305a1e0a0e61bd1f2bf7209628f1c4539cabbb4c790162df22ad714d19",
+      "size": 10360
+    },
+    {
+      "path": "fontlib/cousine_v31_d6lPkaiiRdih4SpP_SEXdTv83vhhrGd5OR7i.woff2",
+      "sha256": "d51359069981ed2b3d08907c931760f2b48de0980d9e8cc774708a69c1dd58ea",
+      "size": 39284
+    },
+    {
+      "path": "fontlib/domine_v25_L0x8DFMnlVwD4h3htfqnZypEi0K3.woff2",
+      "sha256": "3116ed836a707fe7ffbf14f0919c9d00c3a115af4b575419a93d254979254359",
+      "size": 14960
+    },
+    {
+      "path": "fontlib/domine_v25_L0x8DFMnlVwD4h3hu_qnZypEiw.woff2",
+      "sha256": "8f2d6e617f47c946643f53599d33cb5eff1539f8cc7a91be49b533fdbba30b88",
+      "size": 28276
+    },
+    {
+      "path": "fontlib/firasans_v18_va9B4kDNxMZdWfMOD5VnLK3eRhf6Xl7Glw.woff2",
+      "sha256": "811e73619cc2909792e8fa134c8d1ed714b898310dd4cc218fc29e40a5dc2890",
+      "size": 17744
+    },
+    {
+      "path": "fontlib/firasans_v18_va9B4kDNxMZdWfMOD5VnLK3eSBf6Xl7Gl3LX.woff2",
+      "sha256": "7c621eb4dba8b6aa4f7e060d0f4121fb557dde15145ba1573a39c3b6fdb11167",
+      "size": 32900
+    },
+    {
+      "path": "fontlib/firasans_v18_va9C4kDNxMZdWfMOD5VvkrjHYTLVdlTOr0s.woff2",
+      "sha256": "b28afd93d1ff401dcd885b1c4ca46a161c55aea6cc93cc0843e7ec2594840ab1",
+      "size": 33912
+    },
+    {
+      "path": "fontlib/firasans_v18_va9C4kDNxMZdWfMOD5VvkrjJYTLVdlTO.woff2",
+      "sha256": "f49e39ea0fb8c2a34a47d930ae154cc92985fd68eb5860a07833b960e661ff19",
+      "size": 18296
+    },
+    {
+      "path": "fontlib/firasans_v18_va9E4kDNxMZdWfMOD5Vvl4jLazX3dA.woff2",
+      "sha256": "7b8f0fbf813f59df6e7df17410a84850c3e690f98c90b9273371ef83796f8bc5",
+      "size": 17464
+    },
+    {
+      "path": "fontlib/firasans_v18_va9E4kDNxMZdWfMOD5VvmYjLazX3dGTP.woff2",
+      "sha256": "832c1a4f6010645786a5ea6a27f39eafc90087ead31ded71d0c1302509a07ef6",
+      "size": 32120
+    },
+    {
+      "path": "fontlib/firasans_v18_va9f4kDNxMZdWfMOD5VvkrByRCf2VFnklULWJXg.woff2",
+      "sha256": "0d3b58e72f12a1b2d4fe84b0a7dbb9cb880a5fa9a1924ec4ae3600f5e67c6204",
+      "size": 34664
+    },
+    {
+      "path": "fontlib/firasans_v18_va9f4kDNxMZdWfMOD5VvkrByRCf4VFnklULW.woff2",
+      "sha256": "9afe1a78a9b69852e13b60ff8413a62c2f84028496e53cf7db82f6a854930a6f",
+      "size": 18708
+    },
+    {
+      "path": "fontlib/fontlib.css",
+      "sha256": "edbd65ed035f7ba48edc0cef8ab427f8fcd15d5bb575f099bae5a88fea042477",
+      "size": 160347
+    },
+    {
+      "path": "fontlib/ibmplexmono_v20_-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2",
+      "sha256": "c36f509c0a8f9f85f29cb44bc8701d8a9e0b14c499e77a884f789ead7093a7ac",
+      "size": 10052
+    },
+    {
+      "path": "fontlib/ibmplexmono_v20_-F63fjptAgt5VM-kVkqdyU8n1iEq131nj-otFQ.woff2",
+      "sha256": "f1050dc5317b43434c0aeda599d4624c774ffc162e87a8cf204b949b6a85816d",
+      "size": 8860
+    },
+    {
+      "path": "fontlib/ibmplexmono_v20_-F6pfjptAgt5VM-kVkqdyU8n1ioa1XdgregdFA.woff2",
+      "sha256": "2665f5fbbb334780fa135c7f1dc6e2459061a2d6d44c32b7c1fdbc34cde65ede",
+      "size": 11568
+    },
+    {
+      "path": "fontlib/ibmplexmono_v20_-F6pfjptAgt5VM-kVkqdyU8n1ioa23dgregdFOFh.woff2",
+      "sha256": "c590f625acd1a18021f23486445b03b8435879b406db1003d3fdd7804e9319fb",
+      "size": 9788
+    },
+    {
+      "path": "fontlib/ibmplexmono_v20_-F6qfjptAgt5VM-kVkqdyU8n3pQPwl5FgsAXHNlYzg.woff2",
+      "sha256": "099842414ddad0cb366cf984641b14e75c01a2c6e3f42fa13a6e89d1f4c3fc20",
+      "size": 8748
+    },
+    {
+      "path": "fontlib/ibmplexmono_v20_-F6qfjptAgt5VM-kVkqdyU8n3pQPwlBFgsAXHNk.woff2",
+      "sha256": "9e1455e6e9c5866f607e464fffb7855486dcf575b7e69b83a3d234e587fce41b",
+      "size": 10128
+    },
+    {
+      "path": "fontlib/ibmplexmono_v20_-F6sfjptAgt5VM-kVkqdyU8n1ioSblJ1gMoQPttozw.woff2",
+      "sha256": "6b903205e8d5a01239d44ef84848a221b7e4a34d7ac118772907b7160c3fc072",
+      "size": 11564
+    },
+    {
+      "path": "fontlib/ibmplexmono_v20_-F6sfjptAgt5VM-kVkqdyU8n1ioSblJ1jsoQPttoz6Pz.woff2",
+      "sha256": "b1ba1f6263ace5830469368dd7ea565d55542ab2850faed8b1c8641bbbc5b3a7",
+      "size": 9972
+    },
+    {
+      "path": "fontlib/lato_v25_S6u8w4BMUTPHjxsAUi-qNiXg7eU0.woff2",
+      "sha256": "faa2f0453abc8d16a6a13856d79be9c426ca0e1e492e1edc735d135f2772b2e2",
+      "size": 3068
+    },
+    {
+      "path": "fontlib/lato_v25_S6u8w4BMUTPHjxsAXC-qNiXg7Q.woff2",
+      "sha256": "5c3360f8439a1a3f48e8b58fcb6f3a3cbaaa76488a1b846acfe1e3b623c0562f",
+      "size": 14860
+    },
+    {
+      "path": "fontlib/lato_v25_S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2",
+      "sha256": "78e850d569834892d3f4bdfd2084c7a7c0dc64ae4226f3231af30dae706400e2",
+      "size": 3028
+    },
+    {
+      "path": "fontlib/lato_v25_S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2",
+      "sha256": "7a7ce1a34f3e9944fe88fc61abbc93b6db383afa2b90815fd7ccea456fbce4e5",
+      "size": 14168
+    },
+    {
+      "path": "fontlib/lato_v25_S6u_w4BMUTPHjxsI5wq_FQftx9897sxZ.woff2",
+      "sha256": "948d8c34cc2a93e4cd25055841f629296c83378da5352b3653e0bc4a45382c86",
+      "size": 3124
+    },
+    {
+      "path": "fontlib/lato_v25_S6u_w4BMUTPHjxsI5wq_Gwftx9897g.woff2",
+      "sha256": "4b833d8ce706a334bf1349ac9e8a424d2754604bdc412ee1ea0ae75e1379ea92",
+      "size": 14868
+    },
+    {
+      "path": "fontlib/lato_v25_S6uyw4BMUTPHjx4wXiWtFCc.woff2",
+      "sha256": "d4ae5188a65370ecfe28f42293bbee8297cfd5712c6aadfdb270d48f2bcd88b0",
+      "size": 13980
+    },
+    {
+      "path": "fontlib/lato_v25_S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2",
+      "sha256": "b85c84c655bcbba3bd628b2c1fea0fbdb5b158a9022281a2f910e82fd6da5098",
+      "size": 2988
+    },
+    {
+      "path": "fontlib/librebaskerville_v24_kmKhZrc3Hgbbcjq75U4uslyuy4kn0qNcWx8QDO-WyrubOA.woff2",
+      "sha256": "7ca19d333229f3be14b0ad5f024f11e711282f20078b5f954f7e25796d80de67",
+      "size": 35192
+    },
+    {
+      "path": "fontlib/librebaskerville_v24_kmKhZrc3Hgbbcjq75U4uslyuy4kn0qNcWxEQDO-Wyrs.woff2",
+      "sha256": "a4a7031f5c5283f81711e2df162634c7d9ce2a422a7547f2b7a3b424616f6936",
+      "size": 31336
+    },
+    {
+      "path": "fontlib/librebaskerville_v24_kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNXaxMaC82U-ro.woff2",
+      "sha256": "1b43b44b580f524de254ecb11fb2230bacb2a4a45533687473e8770b1737f25e",
+      "size": 35460
+    },
+    {
+      "path": "fontlib/librebaskerville_v24_kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNZaxMaC82U.woff2",
+      "sha256": "b62b98ef69e6e55b28b9bcac84513eb1bdd1d312a344b1c76e979219923224a5",
+      "size": 33852
+    },
+    {
+      "path": "fontlib/librecaslontext_v5_DdT578IGsGw1aF1JU10PUbTvNNaDMfID8vdkPx6esdPs.woff2",
+      "sha256": "7dc7dc90fb6e140dcdfbfd85aae2bab1f368a448be129fecb953a8290501cef8",
+      "size": 17292
+    },
+    {
+      "path": "fontlib/librecaslontext_v5_DdT578IGsGw1aF1JU10PUbTvNNaDMfID8vdqPx6esdPsE-Y.woff2",
+      "sha256": "e6c4327bae9223fcd289e14d112760ca9bf7bfa561ccd4425516f7c6e79eb02a",
+      "size": 9684
+    },
+    {
+      "path": "fontlib/librecaslontext_v5_DdT678IGsGw1aF1JU10PUbTvNNaDMfq95-5DGjG2u9vUKg.woff2",
+      "sha256": "4e3f448cf8ee878f329a89789f07ca1b791808109749daca79fd3c70b68e8793",
+      "size": 10688
+    },
+    {
+      "path": "fontlib/librecaslontext_v5_DdT678IGsGw1aF1JU10PUbTvNNaDMfq95-BDGjG2u9s.woff2",
+      "sha256": "33a3280b9c3adb725a9e4199a0ed10403eb0378f334cb6aea066dc2d4ba938a2",
+      "size": 19576
+    },
+    {
+      "path": "fontlib/librecaslontext_v5_DdT878IGsGw1aF1JU10PUbTvNNaDMfq21-JJHRO0i9o.woff2",
+      "sha256": "35f60892b140ccb72765aca6da321543897fa14295da84d6a5434e9423e4bbe9",
+      "size": 9592
+    },
+    {
+      "path": "fontlib/librecaslontext_v5_DdT878IGsGw1aF1JU10PUbTvNNaDMfq41-JJHRO0.woff2",
+      "sha256": "1471d8a9f22ba5c42c597c2dc582030297027d3e4c3b59a55aec81678f80485b",
+      "size": 16984
+    },
+    {
+      "path": "fontlib/lora_v37_0QIhMX1D_JOuMw_LIftLtfOm8w.woff2",
+      "sha256": "3d536d49566e82a7905c8b0096758005f6616029ac08528d1f4789c1100dff6a",
+      "size": 40648
+    },
+    {
+      "path": "fontlib/lora_v37_0QIhMX1D_JOuMw_LL_tLtfOm84TX.woff2",
+      "sha256": "9568adfab37a5b030e75c6651f833406bf541ff7621ea8c6059249b39edb258c",
+      "size": 21120
+    },
+    {
+      "path": "fontlib/lora_v37_0QIvMX1D_JOuMwT7I_FMl_GW8g.woff2",
+      "sha256": "55606fbc76dc232c5beb8ef584d7b4f7f76e31a9f27877112e75484356462781",
+      "size": 20176
+    },
+    {
+      "path": "fontlib/lora_v37_0QIvMX1D_JOuMwr7I_FMl_E.woff2",
+      "sha256": "6b102ab35aa1f2b315788bb4853434ed1e52137603bf7a3da71a682276748d45",
+      "size": 37792
+    },
+    {
+      "path": "fontlib/oswald_v57_TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYjMdZwl.woff2",
+      "sha256": "9dde3797547520f762f4ba3a822d417a0872b962bc78753a7ee9f955382b6b85",
+      "size": 21412
+    },
+    {
+      "path": "fontlib/oswald_v57_TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlYHYjMdZwlou4.woff2",
+      "sha256": "7b6295733e76a64d4e0b61e68a565fac062bfc9a285dfcdee9e20ca0b3a613f5",
+      "size": 18944
+    },
+    {
+      "path": "fontlib/poppins_v24_pxiByp8kv8JHgFVrLCz7Z1JlFd2JQEl8qw.woff2",
+      "sha256": "2477683a4b1200680780a759cc1b93b816410362dc5f4c74ebfeafa212bcb74d",
+      "size": 5448
+    },
+    {
+      "path": "fontlib/poppins_v24_pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2",
+      "sha256": "197a3cbd7290c242c5c765268cdd69a9a39867fdc80cd13071f243a81c56fb76",
+      "size": 7848
+    },
+    {
+      "path": "fontlib/poppins_v24_pxiDyp8kv8JHgFVrJJLmy15VF9eOYktMqg.woff2",
+      "sha256": "54c799453c6f2cc895ca6b433513a87b131ad842d744bd298b1b13a7d1b86705",
+      "size": 8628
+    },
+    {
+      "path": "fontlib/poppins_v24_pxiDyp8kv8JHgFVrJJLmy15VGdeOYktMqlap.woff2",
+      "sha256": "01ca455301e692bf1dc0d230e21182ea8253e9fc196de2b9661f32ebb31a78c8",
+      "size": 5912
+    },
+    {
+      "path": "fontlib/poppins_v24_pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2",
+      "sha256": "3dc5d0c52428fe1696264907a1054ebbaac07f8cbe45832c105f819c2ae397c0",
+      "size": 7900
+    },
+    {
+      "path": "fontlib/poppins_v24_pxiEyp8kv8JHgFVrJJnecnFHGPezSQ.woff2",
+      "sha256": "1fae5e73d2788ee1dea1d76eca3a9f157a0386de6be8c280d076a53a64c358a1",
+      "size": 5640
+    },
+    {
+      "path": "fontlib/poppins_v24_pxiGyp8kv8JHgFVrJJLucHtAOvWDSA.woff2",
+      "sha256": "4eaac5c96bd47f9fd1f09c91f0b27b5a93346ed7e94de849c835f2116cea3e1d",
+      "size": 8676
+    },
+    {
+      "path": "fontlib/poppins_v24_pxiGyp8kv8JHgFVrJJLufntAOvWDSHFF.woff2",
+      "sha256": "4380c3cae8ec8ca8853b9ae3fa592fc8f186aa1dd6c4665b68c815e198db0a39",
+      "size": 6012
+    },
+    {
+      "path": "fontlib/ptsans_v18_jizYRExUiTo99u79D0e0x8mIAjcQ-w.woff2",
+      "sha256": "9f8b910d2a205364fa203d6a542069a36e501a108e5c3cc919b8985eafd1cf17",
+      "size": 12188
+    },
+    {
+      "path": "fontlib/ptsans_v18_jizYRExUiTo99u79D0e0ycmIAjcQ-woy.woff2",
+      "sha256": "9a6043702e6d0140510ba518f2b329541d12cc842bd5b2e877409d33e006a263",
+      "size": 7980
+    },
+    {
+      "path": "fontlib/ptsans_v18_jizaRExUiTo99u79D0KExcOPIDU.woff2",
+      "sha256": "5f81586551e5053bf4206d763f65ebbf2e49b7525cb996eeeeba4a53a8af461a",
+      "size": 11464
+    },
+    {
+      "path": "fontlib/ptsans_v18_jizaRExUiTo99u79D0yExcOPIDUg-g.woff2",
+      "sha256": "707577b546ffdc2403e67f16f4aa538adf998a2aca3493fce499caf11976d2c6",
+      "size": 7492
+    },
+    {
+      "path": "fontlib/ptsans_v18_jizdRExUiTo99u79D0e8fOydIRUd0TA7i2bI.woff2",
+      "sha256": "fc9b0102380fbc087ac0170fae2a729d4f48120ca33a841470b3debe6557c8e3",
+      "size": 7908
+    },
+    {
+      "path": "fontlib/ptsans_v18_jizdRExUiTo99u79D0e8fOydLxUd0TA7iw.woff2",
+      "sha256": "d42f17fa9370fcab056ceae141a24e6fb7e79a9e0ff25c9a8caab7d26bf720c2",
+      "size": 12324
+    },
+    {
+      "path": "fontlib/ptsans_v18_jizfRExUiTo99u79B_mh0O6tLR8a8zI.woff2",
+      "sha256": "38d3aa3b6c9ccdc9af1bc44aacdecdffb11be2ce4febaa1e93eed68b612243fd",
+      "size": 11624
+    },
+    {
+      "path": "fontlib/ptsans_v18_jizfRExUiTo99u79B_mh0OCtLR8a8zILig.woff2",
+      "sha256": "94a9333684b6f860dfd07dff784428fc20b448b0f8986fe0bf53acda0fdbffff",
+      "size": 7504
+    },
+    {
+      "path": "fontlib/ptserif_v19_EJRQQgYoZZY2vCFuvAFT9gaQZyffoOFC-I2irw.woff2",
+      "sha256": "b0b1062d323a222dc43d23539526183b2f208317f79aa905aa89f98e8113c69a",
+      "size": 9292
+    },
+    {
+      "path": "fontlib/ptserif_v19_EJRQQgYoZZY2vCFuvAFT9gaQZynfoOFC-I0.woff2",
+      "sha256": "c4ccc041f7601de446b71e38de328ff979696476f9e10d20e5df8d511691ceae",
+      "size": 14152
+    },
+    {
+      "path": "fontlib/ptserif_v19_EJRSQgYoZZY2vCFuvAnt66qSVyvVp8NA.woff2",
+      "sha256": "57d3ae6c4b78cc2d5b568212e1fcd75e5a0be45e6249e55750ba77d22e22bc3b",
+      "size": 13540
+    },
+    {
+      "path": "fontlib/ptserif_v19_EJRSQgYoZZY2vCFuvAnt66qcVyvVp8NAyIw.woff2",
+      "sha256": "1895f8fe0add5c53f4d9450430e4907cd2e2bf1c1f31f9974e3f51722e519389",
+      "size": 8752
+    },
+    {
+      "path": "fontlib/ptserif_v19_EJRTQgYoZZY2vCFuvAFT_r21cgT9rcs.woff2",
+      "sha256": "219a8e6238f7f0b4bbd73b68ee78d0211d44c7808510fa5b9da6a1621bf63e6d",
+      "size": 14236
+    },
+    {
+      "path": "fontlib/ptserif_v19_EJRTQgYoZZY2vCFuvAFT_rO1cgT9rct48Q.woff2",
+      "sha256": "6ca06514dc77d3461b1cbc85d5693fc1042cba121a574c0b8155f63f5c0e7efd",
+      "size": 9268
+    },
+    {
+      "path": "fontlib/ptserif_v19_EJRVQgYoZZY2vCFuvAFWzr-_dSb_.woff2",
+      "sha256": "202b8aa6108ec44ba8f3d717b0c9f7f94c7f4d76f01943104eaadaf6cf3da602",
+      "size": 13400
+    },
+    {
+      "path": "fontlib/ptserif_v19_EJRVQgYoZZY2vCFuvAFYzr-_dSb_nco.woff2",
+      "sha256": "3a274c5ae6fd7bcbd384a080bc8cf124c9a5ba524fc8ae77f12da84b2e455bbf",
+      "size": 8632
+    },
+    {
+      "path": "fontlib/questrial_v19_QdVUSTchPBm7nuUeVf70sCFluW44JUcz.woff2",
+      "sha256": "8fc495f6b64d3cae6b430150d421e163592dc9986abdd785cace7081a120bfb5",
+      "size": 22248
+    },
+    {
+      "path": "fontlib/questrial_v19_QdVUSTchPBm7nuUeVf70viFluW44JQ.woff2",
+      "sha256": "1f4e551b571201073ff09a40f80e2b47b1c25955464fc7ebbcb5ca8347942f70",
+      "size": 14324
+    },
+    {
+      "path": "fontlib/spectral_v15_rnCr-xNNww_2s0amA9M3knjsS_ulYHs.woff2",
+      "sha256": "a62b9bdf669d8fb395c8685321cbf86c2f2bc324e0b28ecf867a036095383d49",
+      "size": 12660
+    },
+    {
+      "path": "fontlib/spectral_v15_rnCr-xNNww_2s0amA9M5knjsS_ul.woff2",
+      "sha256": "bcb83e9c56d40c5111a2bdbc3d8bdabf66bd31337e968f1c223b61879b8d3cad",
+      "size": 14028
+    },
+    {
+      "path": "fontlib/spectral_v15_rnCs-xNNww_2s0amA9uCt23BafaPWnII.woff2",
+      "sha256": "1125ec621f11c8669efc3a86cc05d9e9e221853d2b1c9658d9e30de9d3b90bba",
+      "size": 15180
+    },
+    {
+      "path": "fontlib/spectral_v15_rnCs-xNNww_2s0amA9uCt23PafaPWnIIMrY.woff2",
+      "sha256": "e06de276e6b69b3501de2ff0e45a7f159ba71bcca576f401098e09c0355e1ced",
+      "size": 13312
+    },
+    {
+      "path": "fontlib/spectral_v15_rnCt-xNNww_2s0amA9M8onTmTNmnUHowCw.woff2",
+      "sha256": "537c651195b85f73d4a434a72af3b328081e1a544395946d374fb9a957494a21",
+      "size": 13528
+    },
+    {
+      "path": "fontlib/spectral_v15_rnCt-xNNww_2s0amA9M8onrmTNmnUHo.woff2",
+      "sha256": "7cfafd3583aecfe216f860d7a1c5689e86f7f92681946ca582d042c1c96b37d7",
+      "size": 14988
+    },
+    {
+      "path": "fontlib/spectral_v15_rnCu-xNNww_2s0amA9M8qsHDWfSFXVAKArc.woff2",
+      "sha256": "1fdd59a028cceea6bbcab1e10f2ccd3d92e6558319dd84180072354cbac3e035",
+      "size": 16004
+    },
+    {
+      "path": "fontlib/spectral_v15_rnCu-xNNww_2s0amA9M8qsHDWfqFXVAKArdqqQ.woff2",
+      "sha256": "547a0b62fee7afbdd5aeab6ca286555a87558ef068d9c2452912a3211dcac912",
+      "size": 14216
+    },
+    {
+      "path": "fontlib/tinos_v26_buE1poGnedXvwj1AW3Fg0C8V-txKWiw.woff2",
+      "sha256": "b8e86472f307f2696cd8f27012de72acad41d0fa5a24dabad204caf59f9fd342",
+      "size": 51692
+    },
+    {
+      "path": "fontlib/tinos_v26_buE1poGnedXvwj1AW3Fu0C8V-txK.woff2",
+      "sha256": "fb6cd8e90c8d964fdbb70335a5e1b7ddd3f375cca4637b91b9d1f47910581bb8",
+      "size": 11616
+    },
+    {
+      "path": "fontlib/tinos_v26_buE2poGnedXvwjX-TmZJ9QA98NQ.woff2",
+      "sha256": "23130597280b73d63d0d956307b961efe7c5ba45792a22296f2aeff3bac3b74d",
+      "size": 11952
+    },
+    {
+      "path": "fontlib/tinos_v26_buE2poGnedXvwjX-TmhJ9QA98NRyYw.woff2",
+      "sha256": "409047e079ee18d5a5ca9bb3659335495517f4f992fc0230a3081d720d3ccc2b",
+      "size": 55796
+    },
+    {
+      "path": "fontlib/tinos_v26_buE4poGnedXvwjX1fmRD8iI_wNU.woff2",
+      "sha256": "617ec6f5a49dadad8b3df566c18fa749b86bef6bf1777896529eb96da65ac656",
+      "size": 47340
+    },
+    {
+      "path": "fontlib/tinos_v26_buE4poGnedXvwjX7fmRD8iI_.woff2",
+      "sha256": "3b426cf3e7ad6f3f933727403a118e3563923cdde910c27cdaf9950454b275c6",
+      "size": 10904
+    },
+    {
+      "path": "fontlib/tinos_v26_buEzpoGnedXvwjX-Rt1s4C0f_f5Iai0.woff2",
+      "sha256": "9e3e6c6e5d89d3cf447ec032a14a87b49149e5116908754c1a99a6e19bb91094",
+      "size": 11924
+    },
+    {
+      "path": "fontlib/tinos_v26_buEzpoGnedXvwjX-Rt1s4CMf_f5Iai0Ycw.woff2",
+      "sha256": "43ed6593521966ad655b33a75f5bf644c6c0811f2311f30b0a9b19cad480c8d8",
+      "size": 54772
+    },
+    {
+      "path": "fontlib/ubuntu_v21_4iCp6KVjbNBYlgoKejZPslyBN4FNgYUJ31U.woff2",
+      "sha256": "e7470f55e2d3ae3338429b3932033b812d131a1e0474984db1b813a93b1bb521",
+      "size": 19840
+    },
+    {
+      "path": "fontlib/ubuntu_v21_4iCp6KVjbNBYlgoKejZPslyPN4FNgYUJ.woff2",
+      "sha256": "ba727f8f8dd358cad58f6bb04a6f871c923cdd1028bf30f174cb87aa61f0a1ec",
+      "size": 15428
+    },
+    {
+      "path": "fontlib/ubuntu_v21_4iCs6KVjbNBYlgoKcQ72nU6AF7xm.woff2",
+      "sha256": "c0a43c2ed13c456b3a4afa5db09b77403855dd3359576daf453674af5e766fea",
+      "size": 17752
+    },
+    {
+      "path": "fontlib/ubuntu_v21_4iCs6KVjbNBYlgoKfw72nU6AFw.woff2",
+      "sha256": "1765c67da4a24fc6d9dc3cd16484fe694106495423e45412dc6a986cc6928fd5",
+      "size": 14088
+    },
+    {
+      "path": "fontlib/ubuntu_v21_4iCu6KVjbNBYlgoKej70l0miFYxn.woff2",
+      "sha256": "69592fce9d29a2002cc7f248916c4c75f0dc386bd61b553cec68b021d0dcaa7a",
+      "size": 14776
+    },
+    {
+      "path": "fontlib/ubuntu_v21_4iCu6KVjbNBYlgoKej76l0miFYxnu4w.woff2",
+      "sha256": "1c002267d38bdd3b63df918e184809395cb9b81323604843828a061e6c3c4f80",
+      "size": 18760
+    },
+    {
+      "path": "fontlib/ubuntu_v21_4iCv6KVjbNBYlgoCxCvjsGyNPYZvgw.woff2",
+      "sha256": "39dd78306b58e45cd666ea75964f405fa5957b53af75c024f8adc1f3fe1e6a48",
+      "size": 14920
+    },
+    {
+      "path": "fontlib/ubuntu_v21_4iCv6KVjbNBYlgoCxCvjvmyNPYZvg7UI.woff2",
+      "sha256": "6a8caadf9c9202af350bc97e2062fa01035ac5f520848804c5ae564c06137431",
+      "size": 17420
+    },
+    {
+      "path": "fontlib/zillaslab_v12_dFa4ZfeM_74wlPZtksIFaj8K8VSMdFJ6dZX9.woff2",
+      "sha256": "0a4c58d05bd26a036c0693794ac1096bf649a349844b9abb502587e7ed7aca1c",
+      "size": 10116
+    },
+    {
+      "path": "fontlib/zillaslab_v12_dFa4ZfeM_74wlPZtksIFaj8K_1SMdFJ6dQ.woff2",
+      "sha256": "632fc06376adcdee986f468fc9c2ea03c1f94642a82f79ece521c6c2cb44eea5",
+      "size": 17716
+    },
+    {
+      "path": "fontlib/zillaslab_v12_dFa5ZfeM_74wlPZtksIFYoEf6H2pW3pwfa3Efg.woff2",
+      "sha256": "413b9498c1fde415dfadc210e0234f2c36e84b41f1d46a2253f9a6c52add8a55",
+      "size": 9340
+    },
+    {
+      "path": "fontlib/zillaslab_v12_dFa5ZfeM_74wlPZtksIFYoEf6HOpW3pwfa0.woff2",
+      "sha256": "6d5ec30c781ce44aef71e9ea386f861a6a74db5dc162fbbc126fb522519c38a3",
+      "size": 16788
+    },
+    {
+      "path": "fontlib/zillaslab_v12_dFa6ZfeM_74wlPZtksIFajQ6_V6LVlBKdA.woff2",
+      "sha256": "3ff404c7b778f359601d869d8b01cd0363b475a185d3ced3649f6063aed7d217",
+      "size": 9452
+    },
+    {
+      "path": "fontlib/zillaslab_v12_dFa6ZfeM_74wlPZtksIFajo6_V6LVlA.woff2",
+      "sha256": "90f974cf9aa18b562a98b0bbfd2670ef065f15dc56d39c26d826d71f7b9821e7",
+      "size": 17168
+    },
+    {
+      "path": "fontlib/zillaslab_v12_dFanZfeM_74wlPZtksIFaj8CRHGZV3B3X6_0f1Nk.woff2",
+      "sha256": "9d30c738da33b91f8382f46b1e205a2dcc2c8d7fa4bc3e05837100436862671a",
+      "size": 10040
+    },
+    {
+      "path": "fontlib/zillaslab_v12_dFanZfeM_74wlPZtksIFaj8CRHGZWXB3X6_0fw.woff2",
+      "sha256": "0e3e6a52bc9196fa2c5e14462607056894d0f1b4126d832dc5cdeda898c8a688",
+      "size": 17620
+    },
+    {
+      "path": "fonts/caveat_v23_Wnz6HAc5bAfYB2Q7YjYYiAzcPDKo.woff2",
+      "sha256": "cb0aa78eef73dfb083068a56ba321a4a5cc9841721d261ea8ab5f549db8c7e18",
+      "size": 77224
+    },
+    {
+      "path": "fonts/caveat_v23_Wnz6HAc5bAfYB2Q7ZjYYiAzcPA.woff2",
+      "sha256": "7a0049db01fdd8fc7af7ef36675862a72a5c76d0cb45ae63c9f5b6f1b769dac7",
+      "size": 74572
+    },
+    {
+      "path": "fonts/caveat_v23_Wnz6HAc5bAfYB2Q7aDYYiAzcPDKo.woff2",
+      "sha256": "93b3fdd6ded70837e67eb686a5ed3a896b03d0cd5f7e4be62f07a4efeaebfcfd",
+      "size": 29528
+    },
+    {
+      "path": "fonts/caveat_v23_Wnz6HAc5bAfYB2Q7azYYiAzcPDKo.woff2",
+      "sha256": "b959ec00d64ac7dcf5c3a17641f7d7704c1fedbfe2e8bb0a7e11bd3e9b67ca86",
+      "size": 42888
+    },
+    {
+      "path": "fonts/dancingscript_v29_If2RXTr6YS-zF4S-kcSWSVi_szLgiuEHiC4W.woff2",
+      "sha256": "5e08eb55c88b8658453e2ba916023964e0f67b98cd7abfa436eb8150968ee19e",
+      "size": 42604
+    },
+    {
+      "path": "fonts/dancingscript_v29_If2RXTr6YS-zF4S-kcSWSVi_szLuiuEHiC4Wl-8.woff2",
+      "sha256": "0be22fbaae6716f7b55ce24268c86381589d31fc8f5f43a9295b740a1c54a457",
+      "size": 22608
+    },
+    {
+      "path": "fonts/dancingscript_v29_If2RXTr6YS-zF4S-kcSWSVi_szLviuEHiC4Wl-8.woff2",
+      "sha256": "11a88b30f1441581bb8ef629548a827c540e9559a7bf68a50c61067c200cf03d",
+      "size": 7776
+    },
+    {
+      "path": "fonts/fonts.css",
+      "sha256": "c1bbfbc5f9602672465eb5eff2af66ed819306019ffdc1fbaa9270e08293c1f3",
+      "size": 24287
+    },
+    {
+      "path": "fonts/gochihand_v27_hES06XlsOjtJsgCkx1Pkfon_-18kTWE.woff2",
+      "sha256": "65da857e1941e9856da139e5b4c955cdd49492819565df6ac6e80866bbf92773",
+      "size": 19648
+    },
+    {
+      "path": "fonts/greatvibes_v21_RWmMoKWR9v4ksMfaWd_JN9XBiaQoDmlrMlY.woff2",
+      "sha256": "7d8e55f33a5a625f5a6b8e39def8de8b7c1e3427931edd5cecf037aaea04aa9f",
+      "size": 28504
+    },
+    {
+      "path": "fonts/greatvibes_v21_RWmMoKWR9v4ksMfaWd_JN9XFiaQoDmlr.woff2",
+      "sha256": "0237c8316409c1e4c267156adcc6b17a1d5573320efa45b707fe39989ac3874b",
+      "size": 29596
+    },
+    {
+      "path": "fonts/greatvibes_v21_RWmMoKWR9v4ksMfaWd_JN9XIiaQoDmlrMlY.woff2",
+      "sha256": "bad8bd8b77395c78e79cf5dd883b07c180632828b1e712088f19d771df994283",
+      "size": 1940
+    },
+    {
+      "path": "fonts/greatvibes_v21_RWmMoKWR9v4ksMfaWd_JN9XJiaQoDmlrMlY.woff2",
+      "sha256": "258135d94cae32ef5544db62669f0ca21fd86cc696ba846a2cfa6c292e143c68",
+      "size": 1116
+    },
+    {
+      "path": "fonts/greatvibes_v21_RWmMoKWR9v4ksMfaWd_JN9XKiaQoDmlrMlY.woff2",
+      "sha256": "93e47792ff812a0776ac0b3c4dd88b608d96524342706e40b074a9368179e8b3",
+      "size": 7652
+    },
+    {
+      "path": "fonts/greatvibes_v21_RWmMoKWR9v4ksMfaWd_JN9XLiaQoDmlrMlY.woff2",
+      "sha256": "9db6e80f3c2cda14250c3ee41e5bf1b68280b95c00a54d994a42e845fb0da7ba",
+      "size": 46188
+    },
+    {
+      "path": "fonts/homemadeapple_v24_Qw3EZQFXECDrI2q789EKQZJob0x6XHgOiJM6.woff2",
+      "sha256": "b7b2e90334d02effc6f8dc59d45a6ab2105f7ab862449e3b7cad7325c785b504",
+      "size": 48076
+    },
+    {
+      "path": "fonts/indieflower_v24_m8JVjfNVeKWVnh3QMuKkFcZVZ0uH99GUDs4k.woff2",
+      "sha256": "c8fe1d8d8639928d342b1abf931641be5247fb114b7f6ec697d4280db78f9348",
+      "size": 10348
+    },
+    {
+      "path": "fonts/indieflower_v24_m8JVjfNVeKWVnh3QMuKkFcZVaUuH99GUDg.woff2",
+      "sha256": "7b7dd13c9e06c4873246b4b2eab52bb98b1a269022b11946b88cc746d61f7403",
+      "size": 19100
+    },
+    {
+      "path": "fonts/inter_v20_UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7W0Q5n-wU.woff2",
+      "sha256": "aebf2ab4a4ce6810d73c1ac7be7cafb4e5ec4cee2d6db5fb3e09691747ec4bd6",
+      "size": 18744
+    },
+    {
+      "path": "fonts/inter_v20_UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2",
+      "sha256": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4",
+      "size": 48432
+    },
+    {
+      "path": "fonts/inter_v20_UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7W0Q5n-wU.woff2",
+      "sha256": "46dd4cdca58c26ae87cc6927657bf83b2e8abfc39ffd0ab176e301a8d28d22bf",
+      "size": 19044
+    },
+    {
+      "path": "fonts/inter_v20_UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2",
+      "sha256": "a28eb6d3ccb534ae0c94ca999371df024aab60b08c3c8a5720ee9e32fa0faaa2",
+      "size": 85272
+    },
+    {
+      "path": "fonts/inter_v20_UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7W0Q5n-wU.woff2",
+      "sha256": "fccca918fea40089dacadc7045861314d1a6bc91f1f323cc1eeb22ebcdb321b5",
+      "size": 25844
+    },
+    {
+      "path": "fonts/inter_v20_UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7W0Q5n-wU.woff2",
+      "sha256": "a2e2c783ca6f9c20486e81e72a279203e86730bbf8f01ff6a5ee9dbd09e1c271",
+      "size": 11272
+    },
+    {
+      "path": "fonts/inter_v20_UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7W0Q5n-wU.woff2",
+      "sha256": "8db00ff46c67b22cda8bed865acf7077651cac8d2841d5b40980556b48961931",
+      "size": 10280
+    },
+    {
+      "path": "fonts/kalam_v18_YA9Qr0Wd4kDdMtD6GjLCkiQqtbGstvY.woff2",
+      "sha256": "e8b48830b2667cbe5cea1242ca93fcb607edd50cafbbfc0620ee00b63e346634",
+      "size": 6228
+    },
+    {
+      "path": "fonts/kalam_v18_YA9Qr0Wd4kDdMtD6GjLMkiQqtbGs.woff2",
+      "sha256": "94709c14e53e9ac948054b9ae9e487d220bd6848f11c558898fd897b0057d721",
+      "size": 13224
+    },
+    {
+      "path": "fonts/kalam_v18_YA9Qr0Wd4kDdMtD6GjLNkiQqtbGstvY.woff2",
+      "sha256": "ebc7e2935de45d803665275a0492547940cc00aa5722a21f4f3fa22829f362d7",
+      "size": 47652
+    },
+    {
+      "path": "fonts/kalam_v18_YA9Qr0Wd4kDdMtDqHTLCkiQqtbGstvY.woff2",
+      "sha256": "ece1261539d395aa5e2918bb855e625e9cf42d315965bb9e321d20d7e2651cc7",
+      "size": 6236
+    },
+    {
+      "path": "fonts/kalam_v18_YA9Qr0Wd4kDdMtDqHTLMkiQqtbGs.woff2",
+      "sha256": "c1bc5092263cb16e72fa43621eb116966068950e1b77ffd38fd401dd43ce1120",
+      "size": 13104
+    },
+    {
+      "path": "fonts/kalam_v18_YA9Qr0Wd4kDdMtDqHTLNkiQqtbGstvY.woff2",
+      "sha256": "eb63c97e508e38e0ba40b7fb12aa4937b9d9bb3721869fb0a255854b07667f60",
+      "size": 49552
+    },
+    {
+      "path": "fonts/kalam_v18_YA9dr0Wd4kDdMthQOCfhsCkAj7g.woff2",
+      "sha256": "2e8e8d463f7877c5725d45735f52b720a2808bf3b9aebcd50b4b95a588bb763d",
+      "size": 53104
+    },
+    {
+      "path": "fonts/kalam_v18_YA9dr0Wd4kDdMthROCfhsCkA.woff2",
+      "sha256": "257f0129d54c60cda0f8856ad1de05e760a219c9365fb19cd50b0cc8fdb2c9d1",
+      "size": 14040
+    },
+    {
+      "path": "fonts/kalam_v18_YA9dr0Wd4kDdMthfOCfhsCkAj7g.woff2",
+      "sha256": "409a1c973bba365895b897c14604383b7e3df4e400f43dfb07af64a77e973232",
+      "size": 6784
+    },
+    {
+      "path": "fonts/nothingyoucoulddo_v21_oY1B8fbBpaP5OX3DtrRYf_Q2BPB1SnfZb3OOnVsH2pmp.woff2",
+      "sha256": "cd209e12babc395ffcf71df1683b3afe7ad23527aea618f7ff6366c69228499f",
+      "size": 16072
+    },
+    {
+      "path": "fonts/patrickhand_v25_LDI1apSQOAYtSuYWp8ZhfYe8UMLLubg58xGL.woff2",
+      "sha256": "670f39d1fb3f168229c65b6af8b9016a61915731709c8a1da689e74394bc666f",
+      "size": 10604
+    },
+    {
+      "path": "fonts/patrickhand_v25_LDI1apSQOAYtSuYWp8ZhfYe8UcLLubg58xGL.woff2",
+      "sha256": "5741a7686a0735e4c440b80251f41092ef990d763aef2cba516f1b36115f5a47",
+      "size": 4748
+    },
+    {
+      "path": "fonts/patrickhand_v25_LDI1apSQOAYtSuYWp8ZhfYe8XsLLubg58w.woff2",
+      "sha256": "42156e008dd5fc3000679ff4e9ba9cbd3f417b6317c6dcbe11a12e9c87a09b28",
+      "size": 14224
+    },
+    {
+      "path": "fonts/reeniebeanie_v22_z7NSdR76eDkaJKZJFkkjuvWxXPq1q6Gjb_0.woff2",
+      "sha256": "aa3901be682af0f1faac8436a1f25438b0cc541b6ad2ece5668ae4c0ea70594a",
+      "size": 17936
+    },
+    {
+      "path": "fonts/shadowsintolight_v22_UqyNK9UOIntux_czAvDQx_ZcHqZXBNQzdcD55TecYQ.woff2",
+      "sha256": "61cb1fd4967e283a8934136558ba07abbc2e228a52a5904de18d1c37529b0b69",
+      "size": 15988
+    },
+    {
+      "path": "fonts/shadowsintolight_v22_UqyNK9UOIntux_czAvDQx_ZcHqZXBNQze8D55TecYeIo.woff2",
+      "sha256": "7b3465e88e547870c9002095e346dc0075ee4cb45b18f112910ad5ce4c52522d",
+      "size": 9112
+    },
+    {
+      "path": "index.html",
+      "sha256": "fb51a58aa0b8850ac7ca556880d0b77fc04f09508f0645b5a8568154fbcde934",
+      "size": 243913
+    },
+    {
+      "path": "lib/pdf-lib.min.js",
+      "sha256": "0f9a5cad07941f0826586c94e089d89b918c46e5c17cf2d5a3c6f666e3bc694f",
+      "size": 525099
+    },
+    {
+      "path": "lib/pdf.min.js",
+      "sha256": "5b5799e6f8c680663207ac5b42ee14eed2a406fa7af48f50c154f0c0b1566946",
+      "size": 320004
+    },
+    {
+      "path": "lib/pdf.worker.min.js",
+      "sha256": "feabdf309770ed24bba31a5467836cdc8cf639c705af27d52b585b041bb8527b",
+      "size": 1087212
+    },
+    {
+      "path": "tutorial/copy.gif",
+      "sha256": "316956e469c8d46e800af5e171766e1848b598a4b8f5c1b734c71c103f623af6",
+      "size": 529582
+    },
+    {
+      "path": "tutorial/crop.gif",
+      "sha256": "c6449726865781f24c96914052605ead6a1ea21fb6815768f0698ffc1021d1a6",
+      "size": 266091
+    },
+    {
+      "path": "tutorial/edit-text.gif",
+      "sha256": "f65a8836dc9b96bf52cc7f4f5e73bb5170fd4019dc137fd41b4101e7bf7b3e55",
+      "size": 325932
+    },
+    {
+      "path": "tutorial/elements.gif",
+      "sha256": "3c949e7e729efbfe8cfb69c5a43452fcf7fcb651cdef14c81213a4c64e6886c6",
+      "size": 291266
+    },
+    {
+      "path": "tutorial/sign.gif",
+      "sha256": "50cb03a2650b26689e222248ea84e903c1fe430a07b3d7a4b3fdc4969c5f1ae9",
+      "size": 511819
+    },
+    {
+      "path": "tutorial/text-box.gif",
+      "sha256": "55b8e73f9168d7e2d9455d3d27df6ceaadbfe9562d13b43a5c6762378313a2b9",
+      "size": 402673
+    }
+  ]
+}

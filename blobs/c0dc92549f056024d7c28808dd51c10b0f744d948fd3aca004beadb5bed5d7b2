@@ -504,7 +504,7 @@ function rewriteContent(src,getFont,regions,opt={}){
   const n=src.length,I=[1,0,0,1,0,0];let i=0,opStart=-1;const st=[],arr=[],edits=[];let count=0;
   const mul=(m,q)=>[m[0]*q[0]+m[1]*q[2],m[0]*q[1]+m[1]*q[3],m[2]*q[0]+m[3]*q[2],m[2]*q[1]+m[3]*q[3],m[4]*q[0]+m[5]*q[2]+q[4],m[4]*q[1]+m[5]*q[3]+q[5]];
   const tp=(m,x,y)=>[m[0]*x+m[2]*y+m[4],m[1]*x+m[3]*y+m[5]];
-  let gs={ctm:(opt.ctm||I).slice(),Tc:0,Tw:0,Th:1,TL:0,font:null,Tfs:1,Trise:0,Tr:0,lw:1};let pStart=-1,pPts=[],biStart=-1,ord=0;const gstack=[];let Tm=I.slice(),Tlm=I.slice();
+  let gs={ctm:(opt.ctm||I).slice(),Tc:0,Tw:0,Th:1,TL:0,font:null,Tfs:1,Trise:0,Tr:0,lw:1};let pStart=-1,pPts=[],biStart=-1,ord=0;const lv=[];/* open q…Q groups: where they start, their CTM, the elements drawn inside, moves waiting for the group's end */const gstack=[];let Tm=I.slice(),Tlm=I.slice();
   const WS=c=>c===32||c===10||c===13||c===9||c===12||c===0;const DL=c=>c===40||c===41||c===60||c===62||c===91||c===93||c===123||c===125||c===47||c===37;
   const inR=p=>regions.some(r=>p[0]>=r.x0&&p[0]<=r.x1&&p[1]>=r.y0&&p[1]<=r.y1);
   const nums=k=>st.slice(-k).map(v=>typeof v==='number'?v:0);
@@ -512,13 +512,21 @@ const nextLine=()=>{Tlm=mul([1,0,0,1,0,-gs.TL],Tlm);Tm=Tlm.slice();};
 const addPt=(x,y)=>pPts.push(tp(gs.ctm,x,y));
 const unitBox=()=>{const p=[[0,0],[1,0],[0,1],[1,1]].map(q=>tp(gs.ctm,q[0],q[1]));return[Math.min(...p.map(q=>q[0])),Math.min(...p.map(q=>q[1])),Math.max(...p.map(q=>q[0])),Math.max(...p.map(q=>q[1]))];};
 // one drawn element (a painted path, an image): report it and apply delete / move edits
-const emit=(kind,bb,start,end)=>{
-  const key=(opt.chain||'')+'#'+(ord++);if(opt.elems)opt.elems.push({key,kind,bb});
+const emit=(kind,bb,start,end,ref)=>{let hidden=false;
+  if(gs.clipBB){const c=gs.clipBB;bb=[Math.max(bb[0],c[0]),Math.max(bb[1],c[1]),Math.min(bb[2],c[2]),Math.min(bb[3],c[3])];if(bb[2]<bb[0]-.01||bb[3]<bb[1]-.01)hidden=true;if(bb[2]<bb[0])bb[2]=bb[0];if(bb[3]<bb[1])bb[3]=bb[1];}
+  const key=(opt.chain||'')+'#'+(ord++);if(opt.elems)opt.elems.push({key,kind,bb,hidden,ref:ref||null});for(const L of lv)L.els.push(key);
   const ed=opt.elemEdits&&opt.elemEdits[key];if(!ed)return;
   if(ed.del){edits.push([start,0,'',end]);return;}
-  if(ed.dx||ed.dy){const[a,b,c,d]=gs.ctm,det=a*d-b*c;if(Math.abs(det)<1e-12)return;const lx=(d*ed.dx-c*ed.dy)/det,ly=(a*ed.dy-b*ed.dx)/det;
-    edits.push([start,0,`q 1 0 0 1 ${+lx.toFixed(4)} ${+ly.toFixed(4)} cm `],[end,1,' Q']);}
+    // drawn through a clipping frame set in an enclosing group: decide when that group closes, so the frame can move too
+    if((ed.dx||ed.dy)&&gs.clipLv>0&&lv[gs.clipLv-1]){lv[gs.clipLv-1].pend.push({ed,start,end,ctm:gs.ctm.slice()});return;}
+    if(ed.dx||ed.dy)wrapMove(ed,start,end,gs.ctm);
 };
+const wrapMove=(ed,start,end,m)=>{const[a,b,c,d]=m,det=a*d-b*c;if(Math.abs(det)<1e-12)return;const lx=(d*ed.dx-c*ed.dy)/det,ly=(a*ed.dy-b*ed.dx)/det;
+  edits.push([start,0,`q 1 0 0 1 ${+lx.toFixed(4)} ${+ly.toFixed(4)} cm `],[end,1,' Q']);};
+// a group closes: if everything drawn in it moves by the same amount, move the whole group (clip included); otherwise move the pieces alone
+const closeGroup=(L,qEnd)=>{if(!L||!L.pend.length)return;const e0=L.pend[0].ed,EE=opt.elemEdits||{};
+  const same=L.els.every(k=>{const e=EE[k];return e&&!e.del&&e.dx===e0.dx&&e.dy===e0.dy;});
+  if(same&&qEnd!=null)wrapMove(e0,L.qPos,qEnd,L.ctm);else for(const p of L.pend)wrapMove(p.ed,p.start,p.end,p.ctm);};
 const paint=(stroke,start,end)=>{if(pPts.length){let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;for(const[x,y]of pPts){x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y);}
   const pad=stroke?gs.lw*Math.sqrt(Math.abs(gs.ctm[0]*gs.ctm[3]-gs.ctm[1]*gs.ctm[2]))/2:0;emit(stroke?'stroke':'fill',[x0-pad,y0-pad,x1+pad,y1+pad],start,end);}
   pStart=-1;pPts=[];};
@@ -551,8 +559,8 @@ const paint=(stroke,start,end)=>{if(pPts.length){let x0=Infinity,y0=Infinity,x1=
     if(op===null){if(opStart<0)opStart=t0;if(arr.length)arr[arr.length-1].push(val);else st.push(val);continue;}
     const pos=opStart<0?t0:opStart,end=i;
     switch(op){
-      case'q':gstack.push({...gs,ctm:gs.ctm.slice()});break;case'Q':if(gstack.length)gs=gstack.pop();break;
-      case'cm':gs.ctm=mul(nums(6),gs.ctm);break;case'Do':{const nm=st[st.length-1];if(nm&&nm.name){const k=opt.xkind?opt.xkind(nm.name):null;if(k==='/Image'){emit('image',unitBox(),pos,end);if(opt.onImage)opt.onImage(nm.name,unitBox());}else if(opt.onDo)count+=opt.onDo(nm.name,gs.ctm.slice());}break;}case'w':gs.lw=nums(1)[0];break;case'm':case'l':{if(pStart<0)pStart=pos;const[x,y]=nums(2);addPt(x,y);break;}case'c':{if(pStart<0)pStart=pos;const v=nums(6);addPt(v[0],v[1]);addPt(v[2],v[3]);addPt(v[4],v[5]);break;}case'v':case'y':{if(pStart<0)pStart=pos;const v=nums(4);addPt(v[0],v[1]);addPt(v[2],v[3]);break;}case're':{if(pStart<0)pStart=pos;const[x,y,w,h]=nums(4);addPt(x,y);addPt(x+w,y);addPt(x,y+h);addPt(x+w,y+h);break;}case'h':break;case'S':case's':paint(true,pStart<0?pos:pStart,end);break;case'f':case'F':case'f*':paint(false,pStart<0?pos:pStart,end);break;case'B':case'B*':case'b':case'b*':paint(true,pStart<0?pos:pStart,end);break;case'n':pStart=-1;pPts=[];break;case'BI':biStart=pos;break;case'BT':Tm=I.slice();Tlm=I.slice();break;
+      case'q':gstack.push({...gs,ctm:gs.ctm.slice()});lv.push({qPos:pos,ctm:gs.ctm.slice(),els:[],pend:[]});break;case'Q':if(gstack.length)gs=gstack.pop();closeGroup(lv.pop(),end);break;case'W':case'W*':{gs.clipLv=lv.length;if(pPts.length){let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;for(const[x,y]of pPts){x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y);}const c=gs.clipBB;gs.clipBB=c?[Math.max(c[0],x0),Math.max(c[1],y0),Math.min(c[2],x1),Math.min(c[3],y1)]:[x0,y0,x1,y1];}break;}
+      case'cm':gs.ctm=mul(nums(6),gs.ctm);break;case'Do':{const nm=st[st.length-1];if(nm&&nm.name){const k=opt.xkind?opt.xkind(nm.name):null;if(k==='/Image'){emit('image',unitBox(),pos,end,opt.xref?opt.xref(nm.name):null);if(opt.onImage)opt.onImage(nm.name,unitBox());}else if(opt.onDo)count+=opt.onDo(nm.name,gs.ctm.slice());}break;}case'w':gs.lw=nums(1)[0];break;case'm':case'l':{if(pStart<0)pStart=pos;const[x,y]=nums(2);addPt(x,y);break;}case'c':{if(pStart<0)pStart=pos;const v=nums(6);addPt(v[0],v[1]);addPt(v[2],v[3]);addPt(v[4],v[5]);break;}case'v':case'y':{if(pStart<0)pStart=pos;const v=nums(4);addPt(v[0],v[1]);addPt(v[2],v[3]);break;}case're':{if(pStart<0)pStart=pos;const[x,y,w,h]=nums(4);addPt(x,y);addPt(x+w,y);addPt(x,y+h);addPt(x+w,y+h);break;}case'h':break;case'S':case's':paint(true,pStart<0?pos:pStart,end);break;case'f':case'F':case'f*':paint(false,pStart<0?pos:pStart,end);break;case'B':case'B*':case'b':case'b*':paint(true,pStart<0?pos:pStart,end);break;case'n':pStart=-1;pPts=[];break;case'BI':biStart=pos;break;case'BT':Tm=I.slice();Tlm=I.slice();break;
       case'Tf':{const nm=st[st.length-2];gs.font=nm&&nm.name||gs.font;gs.Tfs=nums(1)[0];break;}
       case'Tc':gs.Tc=nums(1)[0];break;case'Tw':gs.Tw=nums(1)[0];break;case'Tz':gs.Th=nums(1)[0]/100;break;case'TL':gs.TL=nums(1)[0];break;case'Ts':gs.Trise=nums(1)[0];break;case'Tr':gs.Tr=nums(1)[0];break;
       case'Td':{const[a,b]=nums(2);Tlm=mul([1,0,0,1,a,b],Tlm);Tm=Tlm.slice();break;}
@@ -565,6 +573,7 @@ const paint=(stroke,start,end)=>{if(pPts.length){let x0=Infinity,y0=Infinity,x1=
     st.length=0;opStart=-1;arr.length=0;
     if(op==='ID'){i++;const re=/\sEI(?=\s|$)/g;re.lastIndex=i;const m=re.exec(src);i=m?m.index+3:n;if(biStart>=0)emit('image',unitBox(),biStart,i);biStart=-1;}
   }
+  while(lv.length)closeGroup(lv.pop(),null);   // unbalanced q without Q: move pieces alone
   if(!edits.length)return{out:src,count,changed:false};
   edits.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);let out='',last=0;for(const[p,,txt,to]of edits){if(p<last)continue;out+=src.slice(last,p)+txt;last=to??p;}out+=src.slice(last);
   return{out,count,changed:true};
@@ -572,6 +581,7 @@ const paint=(stroke,start,end)=>{if(pPts.length){let x0=Infinity,y0=Infinity,x1=
 // Rewrites one content stream; follows Form XObjects (nested drawing blocks) so text inside them is found too.
 function hideInStream(doc,bin,res,regions,ctm,depth,seen,ctx={}){
   const fc={};const N0=n=>PL.PDFName.of(n);
+  const xref=name=>{try{const xd=res&&res.lookup(N0('XObject'));const r=xd&&xd.get(N0(name));return r?String(r):null;}catch(e){return null;}};
   const xkind=name=>{try{const xd=res&&res.lookup(N0('XObject'));const xo=xd&&xd.lookup(N0(name));return xo&&xo.dict?String(xo.dict.lookup(N0('Subtype'))):null;}catch(e){return null;}};
   const onDo=(name,m)=>{
     if(depth>6)return 0;const N=n=>PL.PDFName.of(n);let ref=null,xo=null;
@@ -588,7 +598,7 @@ function hideInStream(doc,bin,res,regions,ctm,depth,seen,ctx={}){
     }
     seen.set(key,r.count);return r.count;
   };
-  return rewriteContent(bin,nm=>fc[nm]||(fc[nm]=libFontMetrics(res,nm)),regions,{ctm,onDo,xkind,chain:ctx.chain||'',elems:ctx.elems,elemEdits:ctx.elemEdits,onImage:ctx.onImage&&((name,bb)=>{let ref=null;try{const xd=res&&res.lookup(N0('XObject'));ref=xd&&xd.get(N0(name));}catch(e){}ctx.onImage(ref,bb);})});
+  return rewriteContent(bin,nm=>fc[nm]||(fc[nm]=libFontMetrics(res,nm)),regions,{ctm,onDo,xkind,xref,chain:ctx.chain||'',elems:ctx.elems,elemEdits:ctx.elemEdits,onImage:ctx.onImage&&((name,bb)=>{let ref=null;try{const xd=res&&res.lookup(N0('XObject'));ref=xd&&xd.get(N0(name));}catch(e){}ctx.onImage(ref,bb);})});
 }
 function hideTextInPage(doc,page,regions,elemEdits){
   const bin=pageContentBin(page);if(!bin)return 0;const res=page.node.Resources();
@@ -1283,8 +1293,8 @@ function setupKeys(){
     if($('.modalbg'))return;
     if(mod&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}
     if(mod&&e.key.toLowerCase()==='y'){e.preventDefault();redo();return;}
-    if(mod&&e.key.toLowerCase()==='c'){if(selObj()){e.preventDefault();copySel();}return;}
-    if(mod&&e.key.toLowerCase()==='x'){if(selObj()){e.preventDefault();cutSel();}return;}
+    if(mod&&e.key.toLowerCase()==='c'){if(selObj()){e.preventDefault();copySel();}else if(S.psel&&S.psel.keys.length){e.preventDefault();copyPsel(false);}return;}
+    if(mod&&e.key.toLowerCase()==='x'){if(selObj()){e.preventDefault();cutSel();}else if(S.psel&&S.psel.keys.length){e.preventDefault();copyPsel(true);}return;}
     if(mod&&e.key.toLowerCase()==='d'){e.preventDefault();duplicateSel();return;}
     if(mod&&e.key.toLowerCase()==='v'){if(S.clipboard&&!S.clipStale){e.preventDefault();pasteInternal();}return;}
     if(mod&&(e.key==='='||e.key==='+')){e.preventDefault();setZoom(S.zoom*1.2);return;}
@@ -1403,6 +1413,8 @@ function setupProps(){
       case 'align':setAlign(o,a.dataset.v);break;
       case 'nobox':removeBox(o);break;
       case 'pdel':deletePsel();break;
+      case 'pcopy':copyPsel(false);break;
+      case 'pcut':copyPsel(true);break;
       case 'prestore':restorePsel();break;
       case 'fontfile':if(o)pickFontFile(o);break;
       case 'crop':if(o)startCrop(S.sel.page,o);break;
@@ -1478,7 +1490,7 @@ function pickFontFile(o){
 async function elemViewBoxes(i){
   const pg=curDoc().pages[i];if(!pg.srcId)return[];const els=await pageElements(pg);const p=await getPdfPage(pg);const vp=p.getViewport({scale:1,rotation:totalRot(pg)});const ee=pg.elemEdits||{};
   return els.filter(e=>!(ee[e.key]&&ee[e.key].del)).map(e=>{const d=ee[e.key]||{};const c=[[e.bb[0],e.bb[1]],[e.bb[2],e.bb[3]],[e.bb[0],e.bb[3]],[e.bb[2],e.bb[1]]].map(q=>vp.convertToViewportPoint(q[0]+(d.dx||0),q[1]+(d.dy||0)));
-    const x0=Math.min(...c.map(q=>q[0])),y0=Math.min(...c.map(q=>q[1])),x1=Math.max(...c.map(q=>q[0])),y1=Math.max(...c.map(q=>q[1]));return{key:e.key,kind:e.kind,x:x0,y:y0,w:x1-x0,h:y1-y0};});
+    const x0=Math.min(...c.map(q=>q[0])),y0=Math.min(...c.map(q=>q[1])),x1=Math.max(...c.map(q=>q[0])),y1=Math.max(...c.map(q=>q[1]));return{key:e.key,kind:e.kind,ref:e.ref,hidden:e.hidden,x:x0,y:y0,w:x1-x0,h:y1-y0};});
 }
 function drawPsel(){
   document.querySelectorAll('.pselbox').forEach(x=>x.remove());const P=S.psel;if(!P)return;const pv=pageViews[P.page];if(!pv)return;
@@ -1490,11 +1502,15 @@ async function pickElement(e,i,pt){
   const pg=curDoc().pages[i];if(!pg.srcId){clearPsel();return;}const shift=e.shiftKey;const sx=e.clientX,sy=e.clientY;
   let up=false;const onUp=()=>{up=true;};window.addEventListener('pointerup',onUp,{once:true});
   const bs=await elemViewBoxes(i);const area=pg.w*pg.h,tol=Math.max(2,4/S.zoom);
-  const hits=bs.filter(b=>b.w*b.h<area*.5&&pt.x>=b.x-tol&&pt.x<=b.x+b.w+tol&&pt.y>=b.y-tol&&pt.y<=b.y+b.h+tol).sort((a,b)=>Math.max(a.w,1)*Math.max(a.h,1)-Math.max(b.w,1)*Math.max(b.h,1));
+  const hits=bs.filter(b=>!b.hidden&&b.w*b.h<area*.5&&pt.x>=b.x-tol&&pt.x<=b.x+b.w+tol&&pt.y>=b.y-tol&&pt.y<=b.y+b.h+tol).sort((a,b)=>Math.max(a.w,1)*Math.max(a.h,1)-Math.max(b.w,1)*Math.max(b.h,1));
   if(!hits.length){if(!shift)clearPsel();return;}
   // stacked copies of the same thing (some PDFs draw a line or picture twice) are picked together
   const pad=1.5,ov=(p,q)=>{const ix=Math.max(0,Math.min(p.x+p.w,q.x+q.w)+pad-Math.max(p.x,q.x)+pad),iy=Math.max(0,Math.min(p.y+p.h,q.y+q.h)+pad-Math.max(p.y,q.y)+pad);const A=(p.w+2*pad)*(p.h+2*pad),B=(q.w+2*pad)*(q.h+2*pad);return ix*iy/Math.max(1e-6,A+B-ix*iy);};
-  const group=bs.filter(b=>b.w*b.h<area*.5&&ov(b,hits[0])>=.6).map(b=>b.key);const k=hits[0].key;
+  const near=(p,q,m)=>p.x<q.x+q.w+m&&q.x<p.x+p.w+m&&p.y<q.y+q.h+m&&q.y<p.y+p.h+m;
+  // pieces drawing the same picture data close together are one thing (macOS Preview splits stamps/signatures into clipped slices)
+  const sameNear=(p,q)=>!!(p.ref&&p.ref===q.ref&&!p.hidden&&near(p,q,24));
+  let main=hits[0];if(main.ref){const sib=bs.filter(b=>b!==main&&sameNear(b,main));if(sib.length)main=[main,...sib].sort((x,y)=>y.w*y.h-x.w*x.h)[0];}
+  const group=bs.filter(b=>!b.hidden&&b.w*b.h<area*.5&&(ov(b,main)>=.6||sameNear(b,main))).map(b=>b.key);const k=main.key;
   if(shift&&S.psel&&S.psel.page===i){const ks=S.psel.keys;S.psel={page:i,keys:ks.includes(k)?ks.filter(x=>!group.includes(x)):[...new Set([...ks,...group])]};}
   else if(!(S.psel&&S.psel.page===i&&S.psel.keys.includes(k)))S.psel={page:i,keys:group};
   drawPsel();renderProps();
@@ -1510,6 +1526,26 @@ async function movePsel(vdx,vdy){
   pushUndo();pg.elemEdits={...(pg.elemEdits||{})};for(const k of P.keys){const o=pg.elemEdits[k]||{};pg.elemEdits[k]={...o,dx:(o.dx||0)+udx,dy:(o.dy||0)+udy};}
   S.psel=P;renderOverlay(P.page);scheduleThumb(P.page);
 }
+// Copy exactly the selected parts of the PDF: render the page with every other part and all text removed, on a transparent background
+async function copyPsel(cut){
+  const P=S.psel;if(!P||!P.keys.length)return;const d=curDoc(),pg=d.pages[P.page];
+  busy(true,cut?'Cutting…':'Copying…');
+  try{
+    const bs=(await elemViewBoxes(P.page)).filter(b=>P.keys.includes(b.key));if(!bs.length)return;
+    const r={x:Math.min(...bs.map(b=>b.x)),y:Math.min(...bs.map(b=>b.y))};r.w=Math.max(1,Math.max(...bs.map(b=>b.x+b.w))-r.x);r.h=Math.max(1,Math.max(...bs.map(b=>b.y+b.h))-r.y);
+    const ee={...(pg.elemEdits||{})};for(const e of await pageElements(pg))if(!P.keys.includes(e.key))ee[e.key]={del:true};
+    const p1=await getPdfPage(pg),vp1=p1.getViewport({scale:1,rotation:totalRot(pg)}),[vw,vh]=viewDims(pg),A=vp1.convertToPdfPoint(-20,-20),B=vp1.convertToPdfPoint(vw+20,vh+20);
+    const only={...pg,hidden:[{key:'__alltext',r:{x0:Math.min(A[0],B[0]),y0:Math.min(A[1],B[1]),x1:Math.max(A[0],B[0]),y1:Math.max(A[1],B[1])}}],elemEdits:ee};
+    const rp=(await derivedPage(only)).page,sc=Math.min(5,4000/Math.max(r.w,r.h));
+    const c=document.createElement('canvas');c.width=Math.max(1,Math.ceil(r.w*sc));c.height=Math.max(1,Math.ceil(r.h*sc));
+    await rp.render({canvasContext:c.getContext('2d'),viewport:rp.getViewport({scale:sc,rotation:totalRot(pg),offsetX:-r.x*sc,offsetY:-r.y*sc}),background:'rgba(0,0,0,0)'}).promise;
+    const url=c.toDataURL('image/png');S.clipboard={objs:[{type:'image',asset:addAsset(url),x:r.x,y:r.y,w:r.w,h:r.h,opacity:1}],doc:d.id,page:P.page};S.clipStale=false;
+    try{c.toBlob(b=>{if(b&&navigator.clipboard&&window.ClipboardItem)navigator.clipboard.write([new ClipboardItem({'image/png':b})]).catch(()=>{});});}catch(e){}
+    busy(false);
+    if(cut){const n=P.keys.length;pushUndo();pg.elemEdits={...(pg.elemEdits||{})};for(const k of P.keys)pg.elemEdits[k]={...(pg.elemEdits[k]||{}),del:true};S.psel=null;renderOverlay(P.page);scheduleThumb(P.page);renderProps();}
+    toast(`${cut?'Cut':'Copied'} — paste with ${navigator.platform.includes('Mac')?'⌘':'Ctrl+'}V on any page or in another PDF tab`,4500);
+  }catch(e){console.warn('Folio: copy failed',e);toast('Could not copy this part: '+(e.message||e),5000);}finally{busy(false);}
+}
 function deletePsel(){
   const P=S.psel;if(!P||!P.keys.length)return;const pg=curDoc().pages[P.page];pushUndo();pg.elemEdits={...(pg.elemEdits||{})};
   for(const k of P.keys)pg.elemEdits[k]={...(pg.elemEdits[k]||{}),del:true};const n=P.keys.length;S.psel=null;renderOverlay(P.page);scheduleThumb(P.page);renderProps();
@@ -1520,8 +1556,8 @@ function pselPanel(){
   const P=S.psel;const n=P.keys.length;const els=elemCache.get(curDoc().pages[P.page].srcId+':'+curDoc().pages[P.page].srcIndex)?.val||[];
   const kinds=[...new Set(els.filter(e=>P.keys.includes(e.key)).map(e=>e.kind==='image'?'picture':e.kind==='stroke'?'line / outline':'filled shape'))].join(', ');
   return`<div class="ph">PDF element${n>1?"s":""} <span class="muted">page ${P.page+1}</span></div><div class="pg"><div class="tip">${n} selected${kinds?' · '+kinds:''}</div>
-  <div class="btnrow" style="margin-top:10px"><button class="mini" data-a="pdel" style="color:var(--accent)">${icon('trash')} Delete</button><button class="mini" data-a="prestore">Restore original</button></div>
-  <div class="tip" style="margin-top:10px">Drag to move · arrow keys nudge (Shift = 10 pt) · <span class="kbd">Shift</span>+click to select more parts (a line with dots at its ends is several parts) · <span class="kbd">Del</span> deletes. The change is made inside the PDF itself.</div></div>`;
+  <div class="btnrow" style="margin-top:10px"><button class="mini" data-a="pcopy">${icon('copy')} Copy</button><button class="mini" data-a="pcut">Cut</button><button class="mini" data-a="pdel" style="color:var(--accent)">${icon('trash')} Delete</button><button class="mini" data-a="prestore">Restore original</button></div>
+  <div class="tip" style="margin-top:10px">Drag to move · arrow keys nudge (Shift = 10 pt) · <span class="kbd">⌘</span><span class="kbd">C</span> copy / <span class="kbd">⌘</span><span class="kbd">X</span> cut, then paste into any PDF · <span class="kbd">Shift</span>+click to select more parts (a line with dots at its ends is several parts) · <span class="kbd">Del</span> deletes. The change is made inside the PDF itself.</div></div>`;
 }
 async function imageRemoveLines(o){
   const pi=S.sel.page;const base=o.src0||o.asset;const im=await loadImg(base);const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);
@@ -2124,7 +2160,7 @@ function batchSignDialog(){
   });
 }
 /* ================= Info: tutorial, about, ideas & feedback ================= */
-const APP_VERSION='2.6.2';
+const APP_VERSION='2.6.3';
 const NEEDS_NATIVE=1;   // lowest native shell level this web part needs (see Updater.nativeLevel); raise both when the bridge changes
 const appVersion=()=>window.FOLIO_BUILD?`${APP_VERSION} (build ${window.FOLIO_BUILD})`:`${APP_VERSION} (web)`;
 const K=(...k)=>k.map(x=>`<span class="kbd">${x}</span>`).join('+');
@@ -2140,7 +2176,7 @@ const TUTORIAL=[
   {id:'batch',t:'Batch sign, pictures & password',gif:'',steps:[`<b>Batch sign:</b> place your signature on one PDF, select it, and click <b>Apply to many PDFs…</b>. Choose the PDFs, then a folder. Folio saves signed copies (<i>name-signed.pdf</i>) — originals are never changed. Always check a few results.`,`<b>Export pages as images:</b> File ▸ Export Pages as Images… (${K('⇧','⌘','E')}). Choose PNG or JPG and the quality; each page becomes one picture.`,`<b>Save with password:</b> File ▸ Save with Password…. Folio saves a protected copy that asks for the password when opened. A forgotten password cannot be recovered.`,`<b>Compress:</b> File ▸ Save Compressed Copy…. Folio shows the estimated size for each quality level. Need it under a limit? Choose <b>Smaller than</b> and type the size (for example 2 MB) — Folio finds the best quality that fits. Normally only pictures are shrunk and text stays sharp. If your limit is lower than that allows, Folio warns you, recommends a minimum, and — if you continue — turns each page into a picture to reach it (text gets softer and can no longer be edited, but stays searchable).`,`<b>Export pages:</b> in the <b>Pages</b> panel, ${K('⌘')}-click or ${K('Shift')}-click the pages you want, then <b>Export…</b> (or <b>Tools ▸ Export pages</b> and type a range such as 1-3, 5). Save them as one PDF or as a separate PDF for each page; optionally delete them from the document afterwards.`,`All of these are also under <b>Tools</b> in the right-hand panel when nothing is selected.`],sign:['⇧⌘E — export images','Originals stay untouched']},
   {id:'save',t:'Open, save & print',gif:'',steps:[`${K('⌘','O')} opens PDFs — or drag them onto the window or the Dock icon. Several PDFs open as tabs.`,`${K('⌘','S')} saves straight back to the same file. ${K('⇧','⌘','S')} saves a copy under a new name.`,`${K('⌘','P')} prints. Pinch or ${K('⌘','+')} / ${K('⌘','−')} zooms; hold ${K('Space')} and drag to pan.`,`The <b>Pages</b> panel on the left reorders (drag), rotates, duplicates, deletes and inserts pages.`],sign:['⌘S — save in place','⌘Z — undo']},
 ];
-const CHANGELOG=[['2.6.2','Editing scanned text: stamps and signatures no longer confuse the font and size; added free look-alikes of Bookman, Century Schoolbook and Palatino'],['2.6.1','Compress below the normal minimum: when a size limit cannot be reached by shrinking pictures, Folio can turn pages into pictures (with a quality warning) instead of refusing'],['2.6','Compress to a size you choose, with estimated sizes for each quality level; export selected pages as one PDF or as separate PDFs'],['2.5','Online updates: Folio can update itself, with a signature check and automatic rollback'],['2.4','Save a compressed copy: shrinks the pictures inside large PDFs'],['2.3','Recognise text in scanned pages (OCR): edit scanned lines and make scans searchable'],['2.2','Fill in PDF form fields; edited text stays searchable and selectable in the saved PDF'],['2.1','Batch sign many PDFs at once; export pages as PNG or JPG pictures; save a password-protected copy'],['2.0','Move, resize and align text (left, centre, right, justify); Info window with tutorial'],['1.6','Select, move and delete lines, shapes and pictures that are part of the PDF'],['1.5','Works with Keynote and Canva PDFs; exact fonts installed on your Mac or added from a font file'],['1.4','Text is removed from the PDF instead of covered; tabs keep their spacing; 85-font library with look-alike matching'],['1.3','Crop pictures; remove book lines from signature photos'],['1.2','⌘S saves in place; smoother pinch zoom; zoom layout fix'],['1.1','Native Mac app with offline libraries'],['1.0','First version: edit text, sign, copy elements, mark up, organise pages']];
+const CHANGELOG=[['2.6.3','Moving a stamp or signature that is part of the PDF no longer makes it disappear; copy or cut it (⌘C / ⌘X) and paste it into another PDF'],['2.6.2','Editing scanned text: stamps and signatures no longer confuse the font and size; added free look-alikes of Bookman, Century Schoolbook and Palatino'],['2.6.1','Compress below the normal minimum: when a size limit cannot be reached by shrinking pictures, Folio can turn pages into pictures (with a quality warning) instead of refusing'],['2.6','Compress to a size you choose, with estimated sizes for each quality level; export selected pages as one PDF or as separate PDFs'],['2.5','Online updates: Folio can update itself, with a signature check and automatic rollback'],['2.4','Save a compressed copy: shrinks the pictures inside large PDFs'],['2.3','Recognise text in scanned pages (OCR): edit scanned lines and make scans searchable'],['2.2','Fill in PDF form fields; edited text stays searchable and selectable in the saved PDF'],['2.1','Batch sign many PDFs at once; export pages as PNG or JPG pictures; save a password-protected copy'],['2.0','Move, resize and align text (left, centre, right, justify); Info window with tutorial'],['1.6','Select, move and delete lines, shapes and pictures that are part of the PDF'],['1.5','Works with Keynote and Canva PDFs; exact fonts installed on your Mac or added from a font file'],['1.4','Text is removed from the PDF instead of covered; tabs keep their spacing; 85-font library with look-alike matching'],['1.3','Crop pictures; remove book lines from signature photos'],['1.2','⌘S saves in place; smoother pinch zoom; zoom layout fix'],['1.1','Native Mac app with offline libraries'],['1.0','First version: edit text, sign, copy elements, mark up, organise pages']];
 const IDEAS=['A proper redaction tool that permanently removes sensitive content','Digital certificate signatures (verifiable signing)','Export to Word'];
 /* Feedback → Google Form → Google Sheet. The form link can be built in (DEFAULT_FEEDBACK_FORM)
    or pasted in Info ▸ Ideas & feedback. Entries are also kept on this Mac and re-sent when offline. */

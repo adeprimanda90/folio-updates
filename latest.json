@@ -1,9 +1,9 @@
 {
-  "version": "2.6.2",
+  "version": "2.6.3",
   "minNative": 1,
-  "notes": "Editing scanned text: stamps and signatures no longer confuse the font and size; free look-alikes of Bookman, Century Schoolbook and Palatino",
+  "notes": "Moving a stamp or signature no longer makes it disappear; copy or cut parts of the PDF with Cmd-C / Cmd-X and paste them into another PDF",
   "dmg": "",
-  "published": "2026-11-27T06:40:08Z",
+  "published": "2026-11-27T07:07:28Z",
   "files": [
     {
       "path": "fontextra/GUST-FONT-LICENSE.txt",
@@ -1007,8 +1007,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "686efa8ce904280d71ab9c7c04c44533e7ab2ec52d5691ca114410b687d6a8a6",
-      "size": 266363
+      "sha256": "c0dc92549f056024d7c28808dd51c10b0f744d948fd3aca004beadb5bed5d7b2",
+      "size": 271646
     },
     {
       "path": "lib/pdf-lib.min.js",

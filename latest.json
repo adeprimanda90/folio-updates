@@ -1,10 +1,80 @@
 {
-  "version": "2.6.1",
+  "version": "2.6.2",
   "minNative": 1,
-  "notes": "Compress to any size limit: when shrinking pictures is not enough, Folio warns and can turn pages into pictures instead of refusing",
+  "notes": "Editing scanned text: stamps and signatures no longer confuse the font and size; free look-alikes of Bookman, Century Schoolbook and Palatino",
   "dmg": "",
-  "published": "2026-11-15T14:50:30Z",
+  "published": "2026-11-27T06:40:08Z",
   "files": [
+    {
+      "path": "fontextra/GUST-FONT-LICENSE.txt",
+      "sha256": "2bd69affc3da00715116f713f57eab9707e96daf3562ad0215987b15b9c16f73",
+      "size": 1456
+    },
+    {
+      "path": "fontextra/fontextra.css",
+      "sha256": "20d80fa8fe4eb89b367a8bddb71f5663457d47140b1059bacee4a7678f59deb5",
+      "size": 1915
+    },
+    {
+      "path": "fontextra/texgyrebonum-bold.otf",
+      "sha256": "173710158270252ec1ddd5e69a07fc71853680c7188d67a84d794a465a4dff81",
+      "size": 141140
+    },
+    {
+      "path": "fontextra/texgyrebonum-bolditalic.otf",
+      "sha256": "bd037941d21149ea0d650286537a3266fadfb03f91b4a5a78848ea5781befac9",
+      "size": 145488
+    },
+    {
+      "path": "fontextra/texgyrebonum-italic.otf",
+      "sha256": "518836a0e5bd71f644ae131185be53b04fadb30ef7dbdc483deb5f69bd1fe47d",
+      "size": 147120
+    },
+    {
+      "path": "fontextra/texgyrebonum-regular.otf",
+      "sha256": "8ad5a53ae61d710fe1773f4ecc7fdf6dde7df1df59faa4492a24def95077d6b3",
+      "size": 142660
+    },
+    {
+      "path": "fontextra/texgyrepagella-bold.otf",
+      "sha256": "dd4f9b69f0b24f1fb9be8634abf1fce2009e5c68a30842a3e9f5d6e535900abd",
+      "size": 219564
+    },
+    {
+      "path": "fontextra/texgyrepagella-bolditalic.otf",
+      "sha256": "556fd64655a92bd9f5485ae2c03f7b9cdaf745a27a91d7edb3c3abde997206d2",
+      "size": 216296
+    },
+    {
+      "path": "fontextra/texgyrepagella-italic.otf",
+      "sha256": "069bb27f48eb98a741715227fc6e4b7baf3639c29fc13925f70d1ed8884ac29a",
+      "size": 221936
+    },
+    {
+      "path": "fontextra/texgyrepagella-regular.otf",
+      "sha256": "44e64260716d8f2bbe412baa1ee99b7c995190ac4573177c24def0b9200438c7",
+      "size": 218100
+    },
+    {
+      "path": "fontextra/texgyreschola-bold.otf",
+      "sha256": "988c7b2a0ff0eae77d1df3338751b3c47a5e759117734a375b8e7f9de80e698b",
+      "size": 141752
+    },
+    {
+      "path": "fontextra/texgyreschola-bolditalic.otf",
+      "sha256": "95f085da44c04817771f2a3a754b6eeb442b9a79e79f51dc3b0612e3cc0d75cc",
+      "size": 144864
+    },
+    {
+      "path": "fontextra/texgyreschola-italic.otf",
+      "sha256": "2f45b8c394037951aaec73d947f0b0c3af715950f8f207c9f4290ba37a53a4d2",
+      "size": 143152
+    },
+    {
+      "path": "fontextra/texgyreschola-regular.otf",
+      "sha256": "935b82e25f56b1d1276ca82793205e8ce254fbb37ebd38bedf7388cef21fbf44",
+      "size": 140596
+    },
     {
       "path": "fontlib/archivonarrow_v35_tss0ApVBdCYD5Q7hcxTE1ArZ0bb-iXxw2d8oBxk.woff2",
       "sha256": "db821b657f1d6b362a8bbddb4452073d156cea76854a157d3b33b4a999fcebfa",
@@ -937,8 +1007,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "83f1f5905451fc095591432610d2d10c73f381086f47ef640a94ef108cc58d31",
-      "size": 262432
+      "sha256": "686efa8ce904280d71ab9c7c04c44533e7ab2ec52d5691ca114410b687d6a8a6",
+      "size": 266363
     },
     {
       "path": "lib/pdf-lib.min.js",

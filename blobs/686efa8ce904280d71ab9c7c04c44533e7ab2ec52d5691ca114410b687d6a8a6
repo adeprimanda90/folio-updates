@@ -6,6 +6,7 @@
 <title>Folio PDF Editor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="fonts/fonts.css" rel="stylesheet">
+<link id="fontextra" href="fontextra/fontextra.css" rel="stylesheet">
 <link id="fontlib" href="fontlib/fontlib.css" rel="stylesheet">
 <script src="lib/pdf.min.js"></script>
 <script src="lib/pdf-lib.min.js"></script>
@@ -373,7 +374,7 @@ const FONTS={
 const STD={Helvetica:['Helvetica','HelveticaBold','HelveticaOblique','HelveticaBoldOblique'],Times:['TimesRoman','TimesRomanBold','TimesRomanItalic','TimesRomanBoldItalic'],Courier:['Courier','CourierBold','CourierOblique','CourierBoldOblique']};
 /* ---------- font library: bundled Google fonts + fonts installed on this Mac ---------- */
 const FONT_LIB_BUNDLED=[['Roboto','sans'],['Open Sans','sans'],['Lato','sans'],['Montserrat','sans'],['Source Sans 3','sans'],['PT Sans','sans'],['Noto Sans','sans'],['Carlito','sans'],['Arimo','sans'],['Poppins','sans'],['Nunito Sans','sans'],['Raleway','sans'],['Work Sans','sans'],['Barlow','sans'],['Roboto Condensed','sans'],['Fira Sans','sans'],['IBM Plex Sans','sans'],['Ubuntu','sans'],['Mulish','sans'],['Questrial','sans'],['Jost','sans'],['Oswald','sans'],['Archivo Narrow','sans'],['Josefin Sans','sans'],['Inter','sans'],
-  ['Tinos','serif'],['Caladea','serif'],['EB Garamond','serif'],['Crimson Pro','serif'],['Libre Baskerville','serif'],['Merriweather','serif'],['Lora','serif'],['PT Serif','serif'],['Source Serif 4','serif'],['Noto Serif','serif'],['Playfair Display','serif'],['Cormorant Garamond','serif'],['Libre Caslon Text','serif'],['Spectral','serif'],['Domine','serif'],['Bitter','serif'],['Zilla Slab','serif'],['Roboto Slab','serif'],['Arvo','serif'],
+  ['TeX Gyre Bonum','serif'],['TeX Gyre Schola','serif'],['TeX Gyre Pagella','serif'],['Tinos','serif'],['Caladea','serif'],['EB Garamond','serif'],['Crimson Pro','serif'],['Libre Baskerville','serif'],['Merriweather','serif'],['Lora','serif'],['PT Serif','serif'],['Source Serif 4','serif'],['Noto Serif','serif'],['Playfair Display','serif'],['Cormorant Garamond','serif'],['Libre Caslon Text','serif'],['Spectral','serif'],['Domine','serif'],['Bitter','serif'],['Zilla Slab','serif'],['Roboto Slab','serif'],['Arvo','serif'],
   ['Cousine','mono'],['Roboto Mono','mono'],['Source Code Pro','mono'],['IBM Plex Mono','mono']];
 const FONT_LIB_LOCAL=[['Helvetica','sans'],['Helvetica Neue','sans'],['Arial','sans'],['Arial Narrow','sans'],['Avenir','sans'],['Avenir Next','sans'],['Futura','sans'],['Gill Sans','sans'],['Optima','sans'],['Verdana','sans'],['Tahoma','sans'],['Trebuchet MS','sans'],['Lucida Grande','sans'],['Geneva','sans'],['Calibri','sans'],['Segoe UI','sans'],['Century Gothic','sans'],['Franklin Gothic Medium','sans'],['Impact','sans'],
   ['Times New Roman','serif'],['Times','serif'],['Georgia','serif'],['Palatino','serif'],['Baskerville','serif'],['Didot','serif'],['Hoefler Text','serif'],['Big Caslon','serif'],['Cochin','serif'],['Charter','serif'],['Iowan Old Style','serif'],['Cambria','serif'],['Garamond','serif'],['Book Antiqua','serif'],['Bookman Old Style','serif'],['American Typewriter','serif'],['Rockwell','serif'],
@@ -391,9 +392,9 @@ const libHas=f=>libFonts().some(x=>x.f.toLowerCase()===f.toLowerCase());
 const FONT_ALIASES=[[/arial.?narrow|helvetica.?(condensed|narrow)/i,['Arial Narrow','Archivo Narrow','Roboto Condensed']],[/helvetica.?neue/i,['Helvetica Neue','Helvetica','Arimo']],[/arial|helvetica|liberation.?sans|nimbus.?sans/i,['Helvetica','Arial','Arimo']],
   [/times|liberation.?serif|nimbus.?rom/i,['Times New Roman','Times','Tinos']],[/courier|liberation.?mono|nimbus.?mon/i,['Courier New','Courier','Cousine']],[/calibri/i,['Calibri','Carlito']],[/cambria/i,['Cambria','Caladea']],
   [/segoe/i,['Segoe UI','Open Sans','Noto Sans']],[/century.?gothic|avant.?garde/i,['Century Gothic','Questrial','Jost']],[/futura/i,['Futura','Jost']],[/gotham|proxima/i,['Montserrat']],[/myriad/i,['Source Sans 3','PT Sans']],
-  [/minion/i,['Crimson Pro','Source Serif 4']],[/garamond/i,['Garamond','EB Garamond','Cormorant Garamond']],[/palatino|book.?antiqua|pala/i,['Palatino','Book Antiqua','Domine']],[/baskerville/i,['Baskerville','Libre Baskerville']],
+  [/minion/i,['Crimson Pro','Source Serif 4']],[/garamond/i,['Garamond','EB Garamond','Cormorant Garamond']],[/palatino|book.?antiqua|pala/i,['Palatino','Book Antiqua','TeX Gyre Pagella','Domine']],[/bookman/i,['Bookman Old Style','TeX Gyre Bonum']],[/century.?school|schoolbook/i,['Century Schoolbook','TeX Gyre Schola']],[/baskerville/i,['Baskerville','Libre Baskerville']],
   [/caslon/i,['Big Caslon','Libre Caslon Text']],[/georgia/i,['Georgia','Merriweather']],[/verdana|dejavu.?sans/i,['Verdana']],[/tahoma/i,['Tahoma','Verdana']],[/trebuchet/i,['Trebuchet MS','Fira Sans']],[/frutiger/i,['Fira Sans']],
-  [/bookman/i,['Bookman Old Style']],[/rockwell/i,['Rockwell','Roboto Slab','Arvo']],[/gill/i,['Gill Sans']],[/optima/i,['Optima']],[/avenir/i,['Avenir Next','Avenir','Nunito Sans']],[/menlo|monaco|consol/i,['Menlo','Monaco','Source Code Pro']]];
+  [/rockwell/i,['Rockwell','Roboto Slab','Arvo']],[/gill/i,['Gill Sans']],[/optima/i,['Optima']],[/avenir/i,['Avenir Next','Avenir','Nunito Sans']],[/menlo|monaco|consol/i,['Menlo','Monaco','Source Code Pro']]];
 /* fonts the user added from a font file (kept between launches when space allows) */
 const USER_FONTS=[];
 function registerUserFont(name,url){try{const ff=new FontFace(name,`url(${url})`);document.fonts.add(ff);USER_FONTS.push({name,url});FONT_LIB=null;return ff.load();}catch(e){return Promise.reject(e);}}
@@ -748,9 +749,9 @@ function drawObjCanvas(ctx,o){
     case 'patch':ctx.fillStyle=o.color;ctx.fillRect(o.x,o.y,o.w,o.h);break;
     case 'highlight':ctx.globalCompositeOperation='multiply';ctx.fillStyle=o.color;ctx.fillRect(o.x,o.y,o.w,o.h);break;
     case 'underline':case 'strike':{const lw=Math.max(.8,o.h*.075);ctx.strokeStyle=o.color;ctx.lineWidth=lw;const y=o.type==='underline'?o.y+o.h-lw/2:o.y+o.h*.55;ctx.beginPath();ctx.moveTo(o.x,y);ctx.lineTo(o.x+o.w,y);ctx.stroke();break;}
-    case 'text':{ctx.font=fontStr(o);ctx.fillStyle=o.color;ctx.textBaseline='alphabetic';const m=textMetrics(o);const hs=o.hs||1;const Lo=textLayout(ctx,o);const al=o.align||'left';const left=o.bw?o.x:o.x-Lo.W*hs*alignK(o);ctx.translate(left,0);ctx.scale(hs,1);
-      Lo.lines.forEach((ln,k)=>{const y=o.y+k*m.L+m.off;if(al==='justify'&&o.bw&&!ln.last){const ws=ln.t.split(/\s+/).filter(Boolean);if(ws.length>1){const tw=ws.reduce((a,w)=>a+ctx.measureText(w).width,0);const gap=(Lo.W-tw)/(ws.length-1);let x=0;for(const w of ws){ctx.fillText(w,x,y);x+=ctx.measureText(w).width+gap;}return;}}
-        const x=al==='center'?(Lo.W-ln.w)/2:al==='right'?Lo.W-ln.w:0;ctx.fillText(ln.t,x,y);});break;}
+    case 'text':{ctx.font=fontStr(o);ctx.fillStyle=o.color;ctx.textBaseline='alphabetic';const FT=(t,x,y)=>{ctx.fillText(t,x,y);if(o.weight>0){ctx.strokeStyle=o.color;ctx.lineJoin='round';ctx.lineWidth=o.weight*o.fontSize;ctx.strokeText(t,x,y);}};const m=textMetrics(o);const hs=o.hs||1;const Lo=textLayout(ctx,o);const al=o.align||'left';const left=o.bw?o.x:o.x-Lo.W*hs*alignK(o);ctx.translate(left,0);ctx.scale(hs,1);
+      Lo.lines.forEach((ln,k)=>{const y=o.y+k*m.L+m.off;if(al==='justify'&&o.bw&&!ln.last){const ws=ln.t.split(/\s+/).filter(Boolean);if(ws.length>1){const tw=ws.reduce((a,w)=>a+ctx.measureText(w).width,0);const gap=(Lo.W-tw)/(ws.length-1);let x=0;for(const w of ws){FT(w,x,y);x+=ctx.measureText(w).width+gap;}return;}}
+        const x=al==='center'?(Lo.W-ln.w)/2:al==='right'?Lo.W-ln.w:0;FT(ln.t,x,y);});break;}
     case 'image':{const im=imgOf(o.asset);if(im&&im.complete&&im.naturalWidth)ctx.drawImage(im,o.x,o.y,o.w,o.h);break;}
     case 'ink':{ctx.strokeStyle=o.stroke;ctx.lineWidth=o.sw;ctx.lineCap='round';ctx.lineJoin='round';const sx=o.w/(o.ow||1),sy=o.h/(o.oh||1);for(const p of o.paths)drawInkPath(ctx,p.map(q=>[o.x+q[0]*sx,o.y+q[1]*sy]));break;}
     case 'rect':{if(o.fill){ctx.fillStyle=o.fill;ctx.fillRect(o.x,o.y,o.w,o.h);}if(o.sw>0){ctx.strokeStyle=o.stroke;ctx.lineWidth=o.sw;ctx.strokeRect(o.x,o.y,o.w,o.h);}break;}
@@ -763,7 +764,7 @@ function drawObjCanvas(ctx,o){
   ctx.restore();
 }
 function placeEl(e,o,z){const b=o.type==='text'?{x:o.x,y:o.y}:objBox(o);e.style.left=b.x*z+'px';e.style.top=b.y*z+'px';if(o.type!=='text'&&o.type!=='note'){e.style.width=b.w*z+'px';e.style.height=b.h*z+'px';}}
-function applyTextStyle(e,o,z){e.style.fontFamily=fontCss(o);e.style.fontSize=o.fontSize*z+'px';e.style.lineHeight=o.lineHeight||1.2;e.style.color=o.color;e.style.fontWeight=o.bold?'700':'400';e.style.fontStyle=o.italic?'italic':'normal';e.style.opacity=o.opacity??1;const hs=o.hs&&Math.abs(o.hs-1)>.001?o.hs:1,al=o.align||'left';if(o.bw){e.style.width=(o.bw/hs)*z+'px';e.style.whiteSpace='pre-wrap';e.style.textAlign=al;e.style.transform=hs!==1?`scaleX(${hs})`:'';}else{const k=alignK(o);e.style.width='';e.style.whiteSpace='pre';e.style.textAlign=al==='justify'?'left':al;e.style.transform=(k?`translateX(calc(${-k*100}% * ${hs})) `:'')+(hs!==1?`scaleX(${hs})`:'');}}
+function applyTextStyle(e,o,z){e.style.fontFamily=fontCss(o);e.style.fontSize=o.fontSize*z+'px';e.style.lineHeight=o.lineHeight||1.2;e.style.color=o.color;e.style.fontWeight=o.bold?'700':'400';e.style.fontStyle=o.italic?'italic':'normal';e.style.opacity=o.opacity??1;e.style.webkitTextStroke=o.weight>0?`${o.weight*o.fontSize*z}px ${o.color}`:'';const hs=o.hs&&Math.abs(o.hs-1)>.001?o.hs:1,al=o.align||'left';if(o.bw){e.style.width=(o.bw/hs)*z+'px';e.style.whiteSpace='pre-wrap';e.style.textAlign=al;e.style.transform=hs!==1?`scaleX(${hs})`:'';}else{const k=alignK(o);e.style.width='';e.style.whiteSpace='pre';e.style.textAlign=al==='justify'?'left':al;e.style.transform=(k?`translateX(calc(${-k*100}% * ${hs})) `:'')+(hs!==1?`scaleX(${hs})`:'');}}
 function makeObjEl(o,z){
   let e;
   switch(o.type){
@@ -1767,13 +1768,34 @@ function inpaintText(src,bg,ink){
   for(let pass=0;pass<2;pass++){const s2=new Uint8ClampedArray(d);for(let y=1;y<h-1;y++)for(let X=1;X<w-1;X++){const k=y*w+X;if(!filled[k])continue;for(let ch=0;ch<3;ch++){let v=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)v+=s2[((y+dy)*w+X+dx)*4+ch];d[k*4+ch]=v/9;}}}
   x.putImageData(im,0,0);return c;
 }
+// Keep only pixels that look like this line's ink; everything else (paper, coloured stamps, faint marks) becomes white.
+// Then keep only the band of rows where the letters are, so signature strokes and stamp edges above/below do not count.
+function textInkOnly(src,inkHex,bgHex){
+  const w=src.width,h=src.height,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(src,0,0);
+  const im=g.getImageData(0,0,w,h),d=im.data,I=hex2rgb(inkHex),B=hex2rgb(bgHex),span=Math.max(40,Math.hypot(I[0]-B[0],I[1]-B[1],I[2]-B[2]));
+  const keep=new Uint8Array(w*h);
+  for(let k=0;k<w*h;k++){const p=k*4,dI=Math.hypot(d[p]-I[0],d[p+1]-I[1],d[p+2]-I[2]),dB=Math.hypot(d[p]-B[0],d[p+1]-B[1],d[p+2]-B[2]);
+    const sat=Math.max(d[p],d[p+1],d[p+2])-Math.min(d[p],d[p+1],d[p+2]),inkSat=Math.max(...I)-Math.min(...I);
+    if(dI<span*.62&&dB>span*.3&&sat<inkSat+70)keep[k]=1;}
+  // row profile: the letters are the widest dense band; signature strokes are thin and stamps are filtered by colour
+  const rows=new Float32Array(h);for(let y=0;y<h;y++){let n=0;for(let x=0;x<w;x++)n+=keep[y*w+x];rows[y]=n/w;}
+  const peak=Math.max(...rows),th=peak*.12;let best=null,cur=null;
+  for(let y=0;y<=h;y++){if(y<h&&rows[y]>=th){if(!cur)cur={a:y,b:y,sum:0};cur.b=y;cur.sum+=rows[y];}else if(cur){if(!best||cur.sum>best.sum)best=cur;cur=null;}}
+  // allow a small gap (e.g. between a letter body and its descender)
+  // grow the band up and down while rows still have ink (ascenders, descenders like g j p and commas), stopping at an empty row
+  let a=best?best.a:0,b=best?best.b:h-1;const grow=Math.round((b-a+1)*.55),tiny=.002;
+  for(let y=a-1;y>=Math.max(0,a-grow)&&rows[y]>tiny;y--)a=y;for(let y=b+1;y<=Math.min(h-1,b+grow)&&rows[y]>tiny;y++)b=y;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const k=y*w+x,p=k*4,on=keep[k]&&y>=a&&y<=b;d[p]=d[p+1]=d[p+2]=on?Math.min(...[d[p],d[p+1],d[p+2]]):255;d[p+3]=255;}
+  g.putImageData(im,0,0);c._wPt=src._wPt;return c;
+}
 async function convertOcrLine(i,l,pt){
   const pg=curDoc().pages[i];const pad=Math.max(2,l.h*.22),box={x:l.x-pad,y:l.top-pad,w:l.w+2*pad,h:l.h+2*pad},inner={x:l.x,y:l.top,w:l.w,h:l.h};
   busy(true,'Preparing this line…');let crop,bg,col,ms=[],bold=false;
   try{bg=await sampleBg(i,inner);col=await sampleInk(i,inner,bg);crop=await captureRegion(i,box,4,!pg.srcId);crop._wPt=box.w;
     // measure the real letters in the picture: tighter and more reliable than the recogniser's box
-    {const m=inkCoverage(crop,false);if(m&&m.bh>8&&m.bw>8){const k=crop.width/box.w,e=sizeFromInk(l.str,box.y+m.y0/k,m.bh/k);l={...l,x:box.x+m.x0/k,w:m.bw/k,size:e.size,baseline:e.baseline,inkBot:box.y+(m.y0+m.bh)/k};}}
-    try{const a=await matchFonts(crop,l.str,l.size,false,false,'sans-serif',true),b=await matchFonts(crop,l.str,l.size,true,false,'sans-serif',true);bold=!!(a[0]&&b[0]&&b[0].score>a[0].score+3);ms=bold?b:a;}catch(e){console.warn('font match failed',e);}
+    const clean=textInkOnly(crop,col,bg);
+    {const m=inkCoverage(clean,false);if(m&&m.bh>8&&m.bw>8){const k=crop.width/box.w,e=sizeFromInk(l.str,box.y+m.y0/k,m.bh/k);l={...l,x:box.x+m.x0/k,w:m.bw/k,size:e.size,baseline:e.baseline,inkBot:box.y+(m.y0+m.bh)/k};}}
+    try{const a=await matchFonts(clean,l.str,l.size,false,false,'sans-serif',true),b=await matchFonts(clean,l.str,l.size,true,false,'sans-serif',true);bold=!!(a[0]&&b[0]&&b[0].score>a[0].score+3);ms=bold?b:a;}catch(e){console.warn('font match failed',e);}
   }finally{busy(false);}
   pushUndo();
   const patch={id:nid('o'),type:'image',asset:addAsset(inpaintText(crop,bg,col).toDataURL('image/png')),x:box.x,y:box.y,w:box.w,h:box.h,opacity:1,auto:true};
@@ -1783,6 +1805,13 @@ async function convertOcrLine(i,l,pt){
   try{await document.fonts.load(fontStr(t),l.str);}catch(e){}
   mctx.font=fontStr(t);const mw=mctx.measureText(l.str).width,r=mw>0?l.w/mw:1;if(Math.abs(r-1)>.015&&r>.7&&r<1.4)t.hs=Math.round(r*1000)/1000;else if(mw>0&&(r<=.7||r>=1.4))t.fontSize=Math.round(t.fontSize*r*100)/100;
   {const pw=viewDims(pg)[0],cx=l.x+l.w/2;if(Math.abs(cx-pw/2)<pw*.03&&l.w<pw*.92){t.align='center';t.x=cx;}}
+  // same visual weight as the scan: printing and scanning spread the ink, so find the stroke that gives the same amount of ink
+  try{const k=4,cv=document.createElement('canvas'),g=cv.getContext('2d',{willReadFrequently:true});// count letter pixels the same way on both sides: the scan after cleaning (anything not white), the rendering at the matching threshold
+    const count=(c2,lim)=>{const x=c2.getContext('2d',{willReadFrequently:true}).getImageData(0,0,c2.width,c2.height).data;let n=0;for(let p=0;p<x.length;p+=4)if(x[p]<lim)n++;return n;},dark=c2=>count(c2,158);
+    const target=count(clean,250);let best={w:0,diff:Infinity};
+    for(const w of[0,.01,.02,.03,.04,.055,.07]){cv.width=Math.ceil((l.w*(t.hs||1)+t.fontSize)*k);cv.height=Math.ceil(t.fontSize*2*k);g.fillStyle='#fff';g.fillRect(0,0,cv.width,cv.height);g.save();g.scale(k*(t.hs||1),k);g.font=fontStr(t);g.fillStyle='#000';g.textBaseline='alphabetic';g.fillText(l.str,2,t.fontSize*1.4);if(w){g.strokeStyle='#000';g.lineJoin='round';g.lineWidth=w*t.fontSize;g.strokeText(l.str,2,t.fontSize*1.4);}g.restore();
+      const diff=Math.abs(dark(cv)-target);if(diff<best.diff)best={w,diff};}
+    if(best.w>0)t.weight=best.w;}catch(e){console.warn('Folio: weight match skipped',e);}
   {mctx.font=fontStr(t);const mm=mctx.measureText(l.str);if(l.inkBot!=null&&mm.actualBoundingBoxDescent!=null)l.baseline=l.inkBot-mm.actualBoundingBoxDescent;if(mm.actualBoundingBoxLeft!=null&&!t.align)t.x=l.x+mm.actualBoundingBoxLeft*(t.hs||1);}
   t.y=l.baseline-textMetrics(t).off;pg.objects.push(patch,t);pg.edited.push(l.key);
   renderOverlay(i);renderHints(i);select(i,t.id);startEditText(i,t,{noUndo:true,caret:'end'});
@@ -2095,7 +2124,7 @@ function batchSignDialog(){
   });
 }
 /* ================= Info: tutorial, about, ideas & feedback ================= */
-const APP_VERSION='2.6.1';
+const APP_VERSION='2.6.2';
 const NEEDS_NATIVE=1;   // lowest native shell level this web part needs (see Updater.nativeLevel); raise both when the bridge changes
 const appVersion=()=>window.FOLIO_BUILD?`${APP_VERSION} (build ${window.FOLIO_BUILD})`:`${APP_VERSION} (web)`;
 const K=(...k)=>k.map(x=>`<span class="kbd">${x}</span>`).join('+');
@@ -2111,7 +2140,7 @@ const TUTORIAL=[
   {id:'batch',t:'Batch sign, pictures & password',gif:'',steps:[`<b>Batch sign:</b> place your signature on one PDF, select it, and click <b>Apply to many PDFs…</b>. Choose the PDFs, then a folder. Folio saves signed copies (<i>name-signed.pdf</i>) — originals are never changed. Always check a few results.`,`<b>Export pages as images:</b> File ▸ Export Pages as Images… (${K('⇧','⌘','E')}). Choose PNG or JPG and the quality; each page becomes one picture.`,`<b>Save with password:</b> File ▸ Save with Password…. Folio saves a protected copy that asks for the password when opened. A forgotten password cannot be recovered.`,`<b>Compress:</b> File ▸ Save Compressed Copy…. Folio shows the estimated size for each quality level. Need it under a limit? Choose <b>Smaller than</b> and type the size (for example 2 MB) — Folio finds the best quality that fits. Normally only pictures are shrunk and text stays sharp. If your limit is lower than that allows, Folio warns you, recommends a minimum, and — if you continue — turns each page into a picture to reach it (text gets softer and can no longer be edited, but stays searchable).`,`<b>Export pages:</b> in the <b>Pages</b> panel, ${K('⌘')}-click or ${K('Shift')}-click the pages you want, then <b>Export…</b> (or <b>Tools ▸ Export pages</b> and type a range such as 1-3, 5). Save them as one PDF or as a separate PDF for each page; optionally delete them from the document afterwards.`,`All of these are also under <b>Tools</b> in the right-hand panel when nothing is selected.`],sign:['⇧⌘E — export images','Originals stay untouched']},
   {id:'save',t:'Open, save & print',gif:'',steps:[`${K('⌘','O')} opens PDFs — or drag them onto the window or the Dock icon. Several PDFs open as tabs.`,`${K('⌘','S')} saves straight back to the same file. ${K('⇧','⌘','S')} saves a copy under a new name.`,`${K('⌘','P')} prints. Pinch or ${K('⌘','+')} / ${K('⌘','−')} zooms; hold ${K('Space')} and drag to pan.`,`The <b>Pages</b> panel on the left reorders (drag), rotates, duplicates, deletes and inserts pages.`],sign:['⌘S — save in place','⌘Z — undo']},
 ];
-const CHANGELOG=[['2.6.1','Compress below the normal minimum: when a size limit cannot be reached by shrinking pictures, Folio can turn pages into pictures (with a quality warning) instead of refusing'],['2.6','Compress to a size you choose, with estimated sizes for each quality level; export selected pages as one PDF or as separate PDFs'],['2.5','Online updates: Folio can update itself, with a signature check and automatic rollback'],['2.4','Save a compressed copy: shrinks the pictures inside large PDFs'],['2.3','Recognise text in scanned pages (OCR): edit scanned lines and make scans searchable'],['2.2','Fill in PDF form fields; edited text stays searchable and selectable in the saved PDF'],['2.1','Batch sign many PDFs at once; export pages as PNG or JPG pictures; save a password-protected copy'],['2.0','Move, resize and align text (left, centre, right, justify); Info window with tutorial'],['1.6','Select, move and delete lines, shapes and pictures that are part of the PDF'],['1.5','Works with Keynote and Canva PDFs; exact fonts installed on your Mac or added from a font file'],['1.4','Text is removed from the PDF instead of covered; tabs keep their spacing; 85-font library with look-alike matching'],['1.3','Crop pictures; remove book lines from signature photos'],['1.2','⌘S saves in place; smoother pinch zoom; zoom layout fix'],['1.1','Native Mac app with offline libraries'],['1.0','First version: edit text, sign, copy elements, mark up, organise pages']];
+const CHANGELOG=[['2.6.2','Editing scanned text: stamps and signatures no longer confuse the font and size; added free look-alikes of Bookman, Century Schoolbook and Palatino'],['2.6.1','Compress below the normal minimum: when a size limit cannot be reached by shrinking pictures, Folio can turn pages into pictures (with a quality warning) instead of refusing'],['2.6','Compress to a size you choose, with estimated sizes for each quality level; export selected pages as one PDF or as separate PDFs'],['2.5','Online updates: Folio can update itself, with a signature check and automatic rollback'],['2.4','Save a compressed copy: shrinks the pictures inside large PDFs'],['2.3','Recognise text in scanned pages (OCR): edit scanned lines and make scans searchable'],['2.2','Fill in PDF form fields; edited text stays searchable and selectable in the saved PDF'],['2.1','Batch sign many PDFs at once; export pages as PNG or JPG pictures; save a password-protected copy'],['2.0','Move, resize and align text (left, centre, right, justify); Info window with tutorial'],['1.6','Select, move and delete lines, shapes and pictures that are part of the PDF'],['1.5','Works with Keynote and Canva PDFs; exact fonts installed on your Mac or added from a font file'],['1.4','Text is removed from the PDF instead of covered; tabs keep their spacing; 85-font library with look-alike matching'],['1.3','Crop pictures; remove book lines from signature photos'],['1.2','⌘S saves in place; smoother pinch zoom; zoom layout fix'],['1.1','Native Mac app with offline libraries'],['1.0','First version: edit text, sign, copy elements, mark up, organise pages']];
 const IDEAS=['A proper redaction tool that permanently removes sensitive content','Digital certificate signatures (verifiable signing)','Export to Word'];
 /* Feedback → Google Form → Google Sheet. The form link can be built in (DEFAULT_FEEDBACK_FORM)
    or pasted in Info ▸ Ideas & feedback. Entries are also kept on this Mac and re-sent when offline. */

@@ -1,0 +1,13 @@
+/* TeX Gyre fonts (GUST Font License, see GUST-FONT-LICENSE.txt): free look-alikes of Bookman, Century Schoolbook and Palatino */
+@font-face{font-family:'TeX Gyre Bonum';font-style:normal;font-weight:400;font-display:swap;src:url(texgyrebonum-regular.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Bonum';font-style:normal;font-weight:700;font-display:swap;src:url(texgyrebonum-bold.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Bonum';font-style:italic;font-weight:400;font-display:swap;src:url(texgyrebonum-italic.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Bonum';font-style:italic;font-weight:700;font-display:swap;src:url(texgyrebonum-bolditalic.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Schola';font-style:normal;font-weight:400;font-display:swap;src:url(texgyreschola-regular.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Schola';font-style:normal;font-weight:700;font-display:swap;src:url(texgyreschola-bold.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Schola';font-style:italic;font-weight:400;font-display:swap;src:url(texgyreschola-italic.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Schola';font-style:italic;font-weight:700;font-display:swap;src:url(texgyreschola-bolditalic.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Pagella';font-style:normal;font-weight:400;font-display:swap;src:url(texgyrepagella-regular.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Pagella';font-style:normal;font-weight:700;font-display:swap;src:url(texgyrepagella-bold.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Pagella';font-style:italic;font-weight:400;font-display:swap;src:url(texgyrepagella-italic.otf) format('opentype');}
+@font-face{font-family:'TeX Gyre Pagella';font-style:italic;font-weight:700;font-display:swap;src:url(texgyrepagella-bolditalic.otf) format('opentype');}
